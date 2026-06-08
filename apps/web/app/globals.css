@@ -3,16 +3,18 @@
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary-border: var(--border-color);
 }
 
 :root {
-  --background: 0 0% 100%;      /* белый в HSL */
-  --foreground: 222 84% 4.9%;   /* тёмно-серый */
+  --background: #dbd9d3;      /* белый в HSL */
+  --foreground: #2d2e2b;   /* тёмно-серый */
+  --border-color: #a48159; 
 }
 
 .dark {
-  --background: 222 47% 11%;    /* тёмно-синий */
-  --foreground: 210 40% 98%;    /* почти белый */
+  --background: #2d2e2b;    /* тёмно-синий */
+  --foreground: #dbd9d3;    /* почти белый */
 }
 
 body {
@@ -20,3 +22,4 @@ body {
   color: hsl(var(--foreground));
   transition: background-color 0.3s, color 0.3s;
 }
+

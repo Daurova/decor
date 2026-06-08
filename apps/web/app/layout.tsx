@@ -23,7 +23,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-        <header className="bg-background shadow-sm border-b">
+        <header className="bg-background shadow-sm border-b-3 border-primary-border">
           <div className="container mx-auto px-4 py-4 flex justify-between items-center">
             <div className="text-xl font-bold text-foreground">GLORITER</div>
             <nav className="space-x-4">
@@ -37,7 +37,7 @@ export default function RootLayout({
         <main className="grow container mx-auto px-4 py-8">
           {children}
         </main>
-        <footer className="bg-background border-t py-4 text-center text-foreground text-sm">
+        <footer className="bg-background border-t-3 border-primary-border py-4 text-center text-foreground text-sm">
           © 2026 GLORITER — все права защищены
         </footer>
         </ThemeProvider>
