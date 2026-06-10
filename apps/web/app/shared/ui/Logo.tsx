@@ -14,9 +14,9 @@ export function Logo() {
   useEffect(() => setMounted(true), [])
   
     if (!mounted) return null // Предотвращаем гидратацию
+    //TODO вынести роуты в отдельную функцию
   return (
-    <Link href="/" className="flex items-center">
-
+    <Link href="/" className="flex items-center"> 
       <Image
       src={src}
       className="hover:cursor-pointer"

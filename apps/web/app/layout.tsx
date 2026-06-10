@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import './globals.css'; // Tailwind уже должен импортироваться
-import { ThemeProvider } from './src/providers/theme-provider';
-import { ThemeToggle } from './src/shared/ui/theme-toggle';
-import { Logo } from './src/shared/ui/Logo';
-
+import { ThemeProvider } from './providers/theme-provider';
+import { ThemeToggle } from './shared/ui/theme-toggle';
+import { Logo } from './shared/ui/Logo';
+import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'Каталог товаров | GLORITER',
   description: 'Онлайн-каталог декоративных панелей',
@@ -30,9 +30,9 @@ export default function RootLayout({
               <Logo></Logo>
             </div>
             <nav className="space-x-4">
-              <a href="/about" className="text-foreground hover:text-gray-900">О нас</a>
-              <a href="/cart" className="text-foreground hover:text-gray-900">Каталог</a>
-              <a href="/profile" className="text-foreground hover:text-gray-900">Дизайнерам</a>
+              <Link href="/about" className="text-foreground hover:text-gray-900">О нас</Link>
+              <Link href="/catalogue" className="text-foreground hover:text-gray-900">Каталог</Link>
+              <Link href="/disigners" className="text-foreground hover:text-gray-900">Дизайнерам</Link>
 
             </nav>
             <ThemeToggle></ThemeToggle>
