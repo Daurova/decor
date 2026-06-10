@@ -2,11 +2,11 @@ import Image from "next/image";
 import { CategoryCard } from "./entities/category_card/CategoryCard";
 
 const mockCategories = [
-  { id: 1, name: 'Мебель', slug: 'furniture', imageUrl: 'https://placehold.co/400x400', productCount: 42 },
+  { id: 1, name: 'Гибкий камень', slug: 'furniture', imageUrl: 'https://placehold.co/400x400', productCount: 42 },
   { id: 2, name: 'Освещение', slug: 'lighting', imageUrl: 'https://placehold.co/400x400', productCount: 28 },
-  { id: 3, name: 'Декор', slug: 'decor', imageUrl: 'https://placehold.co/400x400', productCount: 56 },
-  { id: 4, name: 'Текстиль', slug: 'textile', imageUrl: 'https://placehold.co/400x400', productCount: 33 },
-  { id: 5, name: 'Посуда', slug: 'tableware', imageUrl: 'https://placehold.co/400x400', productCount: 19 },
+  { id: 3, name: 'Гибкий камень', slug: 'decor', imageUrl: 'https://placehold.co/400x400', productCount: 56 },
+  { id: 4, name: 'Гибкий камень', slug: 'textile', imageUrl: 'https://placehold.co/400x400', productCount: 33 },
+  { id: 5, name: 'Освещение', slug: 'tableware', imageUrl: 'https://placehold.co/400x400', productCount: 19 },
 ];
 
 export default function Home() {

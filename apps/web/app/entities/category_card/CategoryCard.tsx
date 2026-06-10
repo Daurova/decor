@@ -14,7 +14,7 @@ interface CategoryCardProps {
 export function CategoryCard({ id, name, slug, imageUrl, productCount }: CategoryCardProps) {
   return (
     <Link href={`/category/${slug}`} className="group block">
-      <div className="relative overflow-hidden rounded-xl bg-background-secondary shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+      <div className="relative overflow-hidden rounded-xl bg-background shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
         {/* Изображение */}
         <div className="relative aspect-square w-full overflow-hidden bg-gray-200 dark:bg-gray-700">
           {imageUrl ? (
