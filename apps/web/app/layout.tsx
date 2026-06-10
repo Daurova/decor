@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css'; // Tailwind уже должен импортироваться
 import { ThemeProvider } from './src/providers/theme-provider';
 import { ThemeToggle } from './src/shared/ui/theme-toggle';
+import { Logo } from './src/shared/ui/Logo';
 
 export const metadata: Metadata = {
   title: 'Каталог товаров | GLORITER',
@@ -25,7 +26,9 @@ export default function RootLayout({
         >
         <header className="bg-background shadow-sm border-b-3 border-primary-border">
           <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div className="text-xl font-bold text-foreground">GLORITER</div>
+            <div className="text-xl font-bold text-foreground">
+              <Logo></Logo>
+            </div>
             <nav className="space-x-4">
               <a href="/" className="text-foreground hover:text-gray-900">О нас</a>
               <a href="/cart" className="text-foreground hover:text-gray-900">Каталог</a>
