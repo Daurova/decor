@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { useTheme } from 'next-themes'
 import { LOGO } from '../config/constants'
 import {useState, useEffect} from 'react'
+import Link from 'next/link'
 
 
 export function Logo() {
@@ -14,13 +15,16 @@ export function Logo() {
   
     if (!mounted) return null // Предотвращаем гидратацию
   return (
-    <Image
+    <Link href="/" className="flex items-center">
+
+      <Image
       src={src}
       className="hover:cursor-pointer"
       alt={LOGO.ALT}
       width={LOGO.WIDTH}
       height={LOGO.HEIGHT}
-    >
-    </Image>
+      >
+      </Image>
+    </Link>
   )
 }
