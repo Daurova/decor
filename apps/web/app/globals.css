@@ -10,18 +10,19 @@
 :root {
   --background: #dbd9d3;      /* белый в HSL */
   --foreground: #2d2e2b;   /* тёмно-серый */
-  --background-secondary: #000000;
+  --background-secondary: #f2eeee ;
   --border-color: #a48159; 
 }
 
 .dark {
-  --background: #2d2e2b;    /* тёмно-синий */
-  --foreground: #dbd9d3;    /* почти белый */
+  --background: #2d2e2b;    
+  --foreground: #dbd9d3;   
+  --background-secondary: #151515; 
 }
 
 body {
-  background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
+  background-color: var(--background-secondary);
+  color: var(--foreground);
   transition: background-color 0.3s, color 0.3s;
 }
 
