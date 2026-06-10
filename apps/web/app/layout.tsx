@@ -30,7 +30,6 @@ export default function RootLayout({
               <a href="/" className="text-foreground hover:text-gray-900">О нас</a>
               <a href="/cart" className="text-foreground hover:text-gray-900">Каталог</a>
               <a href="/profile" className="text-foreground hover:text-gray-900">Дизайнерам</a>
-              <a href="/profile" className="text-foreground hover:text-gray-900">Индивидуальный заказ</a>
 
             </nav>
             <ThemeToggle></ThemeToggle>

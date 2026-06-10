@@ -4,11 +4,13 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary-border: var(--border-color);
+  --color-background-secondary: var(--background-secondary);
 }
 
 :root {
   --background: #dbd9d3;      /* белый в HSL */
   --foreground: #2d2e2b;   /* тёмно-серый */
+  --background-secondary: #000000;
   --border-color: #a48159; 
 }
 
