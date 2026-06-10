@@ -1,7 +1,7 @@
 const AboutPage = () => {
 return (
     <>
-    <h1>О нас</h1>
+    <h1 className = 'font-sans'>О нас</h1>
     </>
 )
 }

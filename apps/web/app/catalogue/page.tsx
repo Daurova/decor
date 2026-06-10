@@ -1,7 +1,7 @@
 const Catalog = () => {
 return (
     <>
-    <h1>Каталог</h1>
+    <h1 className = 'font-sans'>Каталог</h1>
     </>
 )
 }

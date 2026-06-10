@@ -15,6 +15,7 @@ export function Logo() {
   
     if (!mounted) return null // Предотвращаем гидратацию
     //TODO вынести роуты в отдельную функцию
+    //TODO сделать width Auto
   return (
     <Link href="/" className="flex items-center"> 
       <Image
