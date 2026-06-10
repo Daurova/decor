@@ -27,9 +27,11 @@ export default function RootLayout({
           <div className="container mx-auto px-4 py-4 flex justify-between items-center">
             <div className="text-xl font-bold text-foreground">GLORITER</div>
             <nav className="space-x-4">
-              <a href="/" className="text-foreground hover:text-gray-900">Каталог</a>
-              <a href="/cart" className="text-foreground hover:text-gray-900">Корзина</a>
-              <a href="/profile" className="text-foreground hover:text-gray-900">Профиль</a>
+              <a href="/" className="text-foreground hover:text-gray-900">О нас</a>
+              <a href="/cart" className="text-foreground hover:text-gray-900">Каталог</a>
+              <a href="/profile" className="text-foreground hover:text-gray-900">Дизайнерам</a>
+              <a href="/profile" className="text-foreground hover:text-gray-900">Индивидуальный заказ</a>
+
             </nav>
             <ThemeToggle></ThemeToggle>
           </div>
