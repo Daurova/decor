@@ -12,7 +12,7 @@ interface CategoryCardProps {
   imageUrl?: string;
   productCount?: number;
 }
-
+//TODO скорректировать цвет темной темы
 export function CategoryCard({ id, name, slug, imageUrl, productCount }: CategoryCardProps) {
   return (
     <Link href={`/category/${slug}`} className="group block">
