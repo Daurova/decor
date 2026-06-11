@@ -1,5 +1,9 @@
+'use client'
 import Image from "next/image";
 import { CategoryCard } from "./entities/category_card/CategoryCard";
+import { CategoryCardSkeleton } from "./entities/category_card/CathegotyCardSkeleton";
+import { useState, useEffect } from 'react'
+import { CardGrid } from "./shared/ui/CardGrid";
 
 const mockCategories = [
   { id: 1, name: 'Гибкий камень', slug: 'furniture', imageUrl: 'https://placehold.co/400x400', productCount: 42 },
@@ -10,16 +14,31 @@ const mockCategories = [
 ];
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(()=>{
+    const timer = setTimeout(()=>{
+      setIsLoading(false)
+    },10000)
+
+    return ()=>clearTimeout(timer)
+  },[])
+
   return (
     <div className="flex flex-col flex-1 items-center justify-centerfont-sans font-sans bg-background-secondary">
       <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-background-secondary sm:items-start">
         <div>
-          <h1 className = 'text-foreground bg-background-secondary font-sans'>ГЛАВНАЯ СТРАНИЦА</h1>
-          {mockCategories.map(category=>{
+          <CardGrid>{isLoading? 
+             Array.from({length:5}).map((_, index) => (
+              <CategoryCardSkeleton key={`skeleton-${index}`} />
+            ))
+          : mockCategories.map(category=>{
             return(
               <CategoryCard  key = {category.id} id = {category.id} slug = {category.slug} name = {category.name} imageUrl={category.imageUrl}></CategoryCard>
             )
-          })}
+          })
+          }
+          </CardGrid>
         </div>
       </main>
     </div>

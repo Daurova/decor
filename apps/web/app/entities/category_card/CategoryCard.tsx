@@ -2,6 +2,8 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import {useState, useEffect} from 'react'
+//TODO добавить скелетон
 
 interface CategoryCardProps {
   id: number;
