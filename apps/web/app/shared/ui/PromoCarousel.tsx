@@ -9,6 +9,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ArrowRightIcon } from '@heroicons/react/16/solid';
 
 interface PromoItem {
   id: number;
@@ -53,9 +54,9 @@ export function PromoCarousel({ items }: PromoCarouselProps) {
 function PromoCard({ title, description, imageUrl, link, discount }: PromoItem) {
   return (
     <Link href={link} className="block group">
-      <div className="relative flex flex-col md:flex-row overflow-hidden rounded-2xl bg-white dark:bg-gray-900 shadow-xl transition-all duration-300 hover:shadow-2xl">
-        {/* Блок изображения (занимает 40% на десктопе, на мобильных – сверху) */}
-        <div className="relative h-56 w-full md:h-auto md:w-2/5">
+      <div className="relative flex flex-col md:flex-row overflow-hidden rounded-2xl bg-white dark:bg-gray-900">
+        {/* Изображение — ещё ниже: h-40 вместо h-48 */}
+        <div className="relative h-40 w-full md:h-auto md:w-2/5">
           <Image
             src={imageUrl}
             alt={title}
@@ -64,28 +65,24 @@ function PromoCard({ title, description, imageUrl, link, discount }: PromoItem) 
             priority
           />
           {discount && (
-            <div className="absolute top-4 left-4 bg-gradient-to-r from-mauve-300 to-mauve-500 text-white text-sm font-bold px-3 py-1 rounded-full shadow-md z-10">
+            <div className="absolute top-2 left-2 bg-gradient-to-r from-mauve-300 to-primary-border text-white text-xs font-bold px-2 py-0.5 rounded-full shadow-md z-10">
               –{discount}%
             </div>
           )}
         </div>
 
-        {/* Текстовый блок */}
-        <div className="flex flex-1 flex-col justify-center p-6 md:p-8 bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900">
-          <h3 className="font-heading text-2xl font-bold text-gray-600 md:text-3xl lg:text-4xl">
+        {/* Текстовый блок — уменьшенные отступы и шрифты */}
+        <div className="flex flex-1 flex-col justify-center p-3 md:p-4 bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900">
+          <h3 className="font-heading text-base font-bold text-gray-600 md:text-lg lg:text-xl">
             {title}
           </h3>
-          <p className="mt-3 text-base text-gray-600 dark:text-gray-300 md:text-lg line-clamp-3">
-            {description}
-          </p>
-          <div className="mt-6">
-            <span className="inline-flex items-center gap-2 rounded-full bg-primary-border/20 px-5 py-2 text-sm font-semibold text-primary-border transition-all group-hover:bg-primary-border group-hover:text-white dark:bg-primary-border/30">
+          {/* description закомментирован, но если понадобится — его тоже можно уменьшить */}
+          {/* <div className="mt-2">
+            <span className="inline-flex items-center gap-2 rounded-full bg-primary-border/20 px-3 py-1 text-xs font-semibold text-primary-border transition-all group-hover:bg-primary-border group-hover:text-white dark:bg-primary-border/30">
               Подробнее
-              <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
+  <ArrowRightIcon className="h-3 w-3 transition-transform group-hover:translate-x-1" />
             </span>
-          </div>
+          </div> */}
         </div>
       </div>
     </Link>
