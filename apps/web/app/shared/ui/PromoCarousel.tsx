@@ -65,14 +65,14 @@ function PromoCard({ title, description, imageUrl, link, discount }: PromoItem) 
             priority
           />
           {discount && (
-            <div className="absolute top-2 left-2 bg-gradient-to-r from-mauve-300 to-primary-border text-white text-xs font-bold px-2 py-0.5 rounded-full shadow-md z-10">
+            <div className="absolute top-2 left-2 bg-linear-to-r from-mauve-300 to-primary-border text-white text-xs font-bold px-2 py-0.5 rounded-full shadow-md z-10">
               –{discount}%
             </div>
           )}
         </div>
 
         {/* Текстовый блок — уменьшенные отступы и шрифты */}
-        <div className="flex flex-1 flex-col justify-center p-3 md:p-4 bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900">
+        <div className="flex flex-1 flex-col justify-center p-3 md:p-4 bg-linear-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900">
           <h3 className="font-heading text-base font-bold text-gray-600 md:text-lg lg:text-xl">
             {title}
           </h3>
