@@ -4,6 +4,35 @@ import { CategoryCard } from "./entities/category_card/CategoryCard";
 import { CategoryCardSkeleton } from "./entities/category_card/CathegotyCardSkeleton";
 import { useState, useEffect } from 'react'
 import { CardGrid } from "./shared/ui/CardGrid";
+import { PromoCarousel }  from './shared/ui/PromoCarousel';
+
+// Моковые данные спецпредложений
+const mockPromos = [
+  {
+    id: 1,
+    title: 'Новая коллекция гибкого камня',
+    description: 'Экологичные материалы, уникальные текстуры. Создайте уют в вашем доме с нашей премиальной серией.',
+    imageUrl: 'https://placehold.co/800x600',
+    link: '/promo/stone-collection',
+    discount: '20',
+  },
+  {
+    id: 2,
+    title: 'Дизайнерское освещение',
+    description: 'Светильники, которые меняют атмосферу. Бесплатная доставка и установка при заказе от 15 000 ₽.',
+    imageUrl: 'https://placehold.co/800x600',
+    link: '/promo/lighting',
+    discount: '15',
+  },
+  {
+    id: 3,
+    title: 'Скидка на декор до 50%',
+    description: 'Вазы, панно, зеркала – всё для создания интерьера мечты. Только до конца месяца.',
+    imageUrl: 'https://placehold.co/800x600',
+    link: '/promo/decor-sale',
+    discount: '50',
+  },
+];
 
 const mockCategories = [
   { id: 1, name: 'Гибкий камень', slug: 'furniture', imageUrl: 'https://placehold.co/400x400', productCount: 42 },
@@ -25,7 +54,11 @@ export default function Home() {
   },[])
 
   return (
+    
     <div className="flex flex-col flex-1 items-center justify-centerfont-sans font-sans bg-background-secondary">
+      <div className="max-w-300 ">
+          <PromoCarousel items ={ mockPromos } />
+        </div>
       <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-background-secondary sm:items-start">
         <div>
           <CardGrid>{isLoading? 
