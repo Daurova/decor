@@ -42,15 +42,20 @@ export default function RootLayout({
         >
         <header className="bg-background shadow-sm border-b-3 border-primary-border">
           <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div className="text-xl font-bold text-foreground">
+            <div className="text-xl font-bold text-foreground p-0">
               <Logo></Logo>
             </div>
-            <nav className="space-x-4">
-              <Link href="/about" className="text-foreground hover:text-gray-900 font-heading">О нас</Link>
-              <Link href="/catalogue" className="text-foreground hover:text-gray-900 font-heading">Каталог</Link>
-              <Link href="/disigners" className="text-foreground hover:text-gray-900 font-heading">Дизайнерам</Link>
-
-            </nav>
+              <nav className="flex gap-2 sm:gap-4 whitespace-nowrap">
+                <Link href="/about" className="text-foreground hover:text-gray-900 font-heading text-sm sm:text-base">
+                  О нас
+                </Link>
+                <Link href="/catalogue" className="text-foreground hover:text-gray-900 font-heading text-sm sm:text-base">
+                  Каталог
+                </Link>
+                <Link href="/disigners" className="text-foreground hover:text-gray-900 font-heading text-sm sm:text-base">
+                  Дизайнерам
+                </Link>
+              </nav>
             <ThemeToggle></ThemeToggle>
           </div>
         </header>
