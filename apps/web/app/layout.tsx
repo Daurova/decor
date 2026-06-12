@@ -52,14 +52,14 @@ export default function RootLayout({
                 <Link href="/catalogue" className="text-foreground hover:text-gray-900 font-heading text-sm sm:text-base">
                   Каталог
                 </Link>
-                <Link href="/disigners" className="text-foreground hover:text-gray-900 font-heading text-sm sm:text-base">
+                <Link href="/designers" className="text-foreground hover:text-gray-900 font-heading text-sm sm:text-base">
                   Дизайнерам
                 </Link>
               </nav>
             <ThemeToggle></ThemeToggle>
           </div>
         </header>
-        <main className="grow container mx-auto px-4 py-8">
+        <main className="grow container mx-auto px-4 py-3">
           {children}
         </main>
         <footer className="bg-background border-t-3 border-primary-border py-4 text-center text-foreground text-sm">
