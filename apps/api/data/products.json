@@ -1,0 +1,162 @@
+[
+  {
+    "name": "Гибкий камень Travertine 1 (серый)",
+    "slug": "gibkii-kamen-travertine-1-seryi",
+    "description": "Гибкий камень Travertine 1 серый, размер 120x3000 мм, толщина 4 мм",
+    "price": 16000,
+    "dimensions": "120x3000 мм",
+    "thickness": "4 мм",
+    "categoryId": 1,
+    "images": []
+  },
+  {
+    "name": "Гибкий камень Travertine 2, теплый",
+    "slug": "gibkii-kamen-travertine-2-teplyi",
+    "description": "Гибкий камень Travertine 2 теплый, размер 1200x60 мм, толщина 4 мм",
+    "price": null,
+    "dimensions": "1200x60 мм",
+    "thickness": "4 мм",
+    "categoryId": 1,
+    "images": []
+  },
+  {
+    "name": "Гибкий камень Travertine 3, теплый",
+    "slug": "gibkii-kamen-travertine-3-teplyi",
+    "description": "Гибкий камень Travertine 3 теплый, размер 1200x60 мм",
+    "price": 4200,
+    "dimensions": "1200x60 мм",
+    "thickness": null,
+    "categoryId": 1,
+    "images": []
+  },
+  {
+    "name": "Гибкий камень MASAIC, 600x1200",
+    "slug": "gibkii-kamen-mosaic-600x1200",
+    "description": "Гибкий камень Mosaic, размер 600x1200 мм, площадь 0,72 кв.м.",
+    "price": 9300,
+    "dimensions": "600x1200 мм",
+    "thickness": null,
+    "categoryId": 1,
+    "images": []
+  },
+  {
+    "name": "Гибкий камень Елочка",
+    "slug": "gibkii-kamen-elochka",
+    "description": "Гибкий камень Елочка, размер 120x60 мм, толщина 4 мм",
+    "price": null,
+    "dimensions": "120x60 мм",
+    "thickness": "4 мм",
+    "categoryId": 1,
+    "images": []
+  },
+  {
+    "name": "Гибкий камень, песок, 1200x600 мм",
+    "slug": "gibkii-kamen-pesok-1200x600",
+    "description": "Гибкий камень, фактура песок, размер 1200x600 мм, толщина 4 мм",
+    "price": null,
+    "dimensions": "1200x600 мм",
+    "thickness": "4 мм",
+    "categoryId": 1,
+    "images": []
+  },
+  {
+    "name": "Гибкий камень, фактурный 1200x600 мм",
+    "slug": "gibkii-kamen-fakturnyi-1200x600",
+    "description": "Гибкий камень фактурный, размер 1200x600 мм, толщина 4,5 мм",
+    "price": null,
+    "dimensions": "1200x600 мм",
+    "thickness": "4,5 мм",
+    "categoryId": 1,
+    "images": []
+  },
+  {
+    "name": "Гибкий камень под сланец, белый",
+    "slug": "gibkii-kamen-pod-slants-belyi",
+    "description": "Гибкий камень под сланец, белый, размер 120x60 мм, площадь 0,72 м2",
+    "price": null,
+    "dimensions": "120x60 мм",
+    "thickness": null,
+    "categoryId": 1,
+    "images": []
+  },
+  {
+    "name": "Гибкий камень мрамор, 3000x120 мм",
+    "slug": "gibkii-kamen-mramor-3000x120",
+    "description": "Гибкий камень мрамор, размер 3000x120 мм, площадь 3,5 м2, толщина 4 мм",
+    "price": 16000,
+    "dimensions": "3000x120 мм",
+    "thickness": "4 мм",
+    "categoryId": 1,
+    "images": []
+  },
+  {
+    "name": "Гибкий камень, сланец (серый) 120x60 мм",
+    "slug": "gibkii-kamen-slants-seryi-120x60",
+    "description": "Гибкий камень сланец серый, размер 120x60 мм, толщина 9 мм",
+    "price": null,
+    "dimensions": "120x60 мм",
+    "thickness": "9 мм",
+    "categoryId": 1,
+    "images": []
+  },
+  {
+    "name": "Гибкий камень, сланец (белый) 120x60 мм",
+    "slug": "gibkii-kamen-slants-belyi-120x60",
+    "description": "Гибкий камень сланец белый, размер 120x60 мм, толщина 9 мм",
+    "price": null,
+    "dimensions": "120x60 мм",
+    "thickness": "9 мм",
+    "categoryId": 1,
+    "images": []
+  },
+  {
+    "name": "Гибкий камень (полоски) белый",
+    "slug": "gibkii-kamen-poloskii-belyi",
+    "description": "Гибкий камень полоски белый, размер 120x60 мм, толщина 4 мм",
+    "price": null,
+    "dimensions": "120x60 мм",
+    "thickness": "4 мм",
+    "categoryId": 1,
+    "images": []
+  },
+  {
+    "name": "Гибкий камень Раммед, 1200x600 мм",
+    "slug": "gibkii-kamen-rammed-1200x600",
+    "description": "Гибкий камень Раммед, размер 1200x600 мм, толщина 4 мм",
+    "price": null,
+    "dimensions": "1200x600 мм",
+    "thickness": "4 мм",
+    "categoryId": 1,
+    "images": []
+  },
+  {
+    "name": "Гибкий камень, скала (белый) 120x60",
+    "slug": "gibkii-kamen-skala-belyi-120x60",
+    "description": "Гибкий камень скала белый, размер 120x60 мм, толщина 5 мм",
+    "price": null,
+    "dimensions": "120x60 мм",
+    "thickness": "5 мм",
+    "categoryId": 1,
+    "images": []
+  },
+  {
+    "name": "Гибкий камень Стоун 1200x60 мм",
+    "slug": "gibkii-kamen-stoun-1200x60",
+    "description": "Гибкий камень Стоун, размер 1200x60 мм, толщина 8 мм",
+    "price": null,
+    "dimensions": "1200x60 мм",
+    "thickness": "8 мм",
+    "categoryId": 1,
+    "images": []
+  },
+  {
+    "name": "Гибкий камень Travertine 4, теплый, полоски",
+    "slug": "gibkii-kamen-travertine-4-teplyj-poloskii",
+    "description": "Гибкий камень Travertine 4 теплый полоски, размер 1200x60 мм, толщина 4 мм",
+    "price": null,
+    "dimensions": "1200x60 мм",
+    "thickness": "4 мм",
+    "categoryId": 1,
+    "images": []
+  }
+]
