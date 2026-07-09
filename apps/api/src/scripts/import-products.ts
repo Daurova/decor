@@ -42,14 +42,23 @@ async function importProducts() {
     name: item.name,
     slug: item.slug,
     description: item.description,
-    price: item.price ? parseFloat(item.price) : 0, // цена в JSON может быть числом или null, переводим в число
-    categoryId: item.categoryId || 1, // если нет категории, ставим 1
-    imageUrl: item.images && item.images.length > 0 ? item.images[0] : null,
-    // берём первое изображение, если оно есть
+    price: item.price ? parseFloat(item.price) : 0,
+    categoryId: item.categoryId || 1,
+    imageUrl: item.imageUrl || null,
+    height: item.height || null,
+    length: item.length || null,
+    thickness: item.thickness || null,
+    additionalInfo: item.additionalInfo || null,
+    material: item.material || null,
+    color: item.color || null,
+    categoryName: item.categoryName || null,
   }));
 
   // 6. Вставляем данные в базу
-  const inserted = await db.insert(products).values(productsToInsert).returning();
+  const inserted = await db
+    .insert(products)
+    .values(productsToInsert)
+    .returning();
   // inserting — возвращает вставленные записи с новыми ID
 
   console.log(`✅ Импортировано ${inserted.length} товаров`);
