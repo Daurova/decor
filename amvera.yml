@@ -7,9 +7,8 @@ meta:
 build:
   additionalCommands:
     - npm install
-    - npm run build --workspace=api   # собираем только бэкенд (чтобы избежать ошибок фронта)
-    - ls -la apps/api/dist            # посмотрим, что внутри dist
-    - find . -name main.js            # найдём все main.js
+    - npm run build --workspace=api
+    - ls -la apps/api/dist
 
 run:
-  scriptName: apps/api/dist/main.js   # убрали /src/
+  scriptName: apps/api/dist/main.js
