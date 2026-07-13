@@ -96,7 +96,7 @@ export function ProductShowcase() {
       // Материал
       if (filters.materials.length && !filters.materials.includes(product.material)) return false;
       // Стили
-      if (filters.styles.length && !product.style.some(s => filters.styles.includes(s))) return false;
+      if (filters.styles.length && product.style?.some(s => filters.styles.includes(s))) return false;
       // Тип освещения
       if (filters.lightingTypes.length && (!product.lightingType || !filters.lightingTypes.includes(product.lightingType))) return false;
       // Цена
