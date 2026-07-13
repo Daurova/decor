@@ -5,11 +5,12 @@ meta:
     version: 20
 
 build:
-  workDir: ./            # явно указываем корень проекта
+  workDir: ./
   additionalCommands:
-    - npm install        # установка зависимостей из корневого package.json
-    - npm run build      # сборка через turbo (собирает и api, и web)
-
+    - npm install
+    - npm run build
+    - ls -la apps/api/dist          # покажет, есть ли папка dist и что внутри
+    - find . -name main.js          # найдёт все файлы main.js во всём проекте
 run:
   workDir: ./            # тоже корень
   scriptName: apps/api/dist/src/main.js   # путь к скомпилированному бэкенду
