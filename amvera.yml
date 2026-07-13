@@ -5,12 +5,11 @@ meta:
     version: 20
 
 build:
-  workDir: ./
   additionalCommands:
     - npm install
-    - npm run build
-    - ls -la apps/api/dist          # покажет, есть ли папка dist и что внутри
-    - find . -name main.js          # найдёт все файлы main.js во всём проекте
+    - npm run build --workspace=api   # собираем только бэкенд (чтобы избежать ошибок фронта)
+    - ls -la apps/api/dist            # посмотрим, что внутри dist
+    - find . -name main.js            # найдём все main.js
+
 run:
-  workDir: ./            # тоже корень
-  scriptName: apps/api/dist/src/main.js   # путь к скомпилированному бэкенду
+  scriptName: apps/api/dist/src/main.js   # пока оставим, но позже уточним
