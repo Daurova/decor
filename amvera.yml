@@ -1,0 +1,15 @@
+meta:
+  environment: node
+  toolchain:
+    name: npm
+    version: 20
+
+build:
+  workDir: ./            # явно указываем корень проекта
+  additionalCommands:
+    - npm install        # установка зависимостей из корневого package.json
+    - npm run build      # сборка через turbo (собирает и api, и web)
+
+run:
+  workDir: ./            # тоже корень
+  scriptName: apps/api/dist/src/main.js   # путь к скомпилированному бэкенду
