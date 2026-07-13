@@ -12,4 +12,4 @@ build:
     - find . -name main.js            # найдём все main.js
 
 run:
-  scriptName: apps/api/dist/src/main.js   # пока оставим, но позже уточним
+  scriptName: apps/api/dist/main.js   # убрали /src/
