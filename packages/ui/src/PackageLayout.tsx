@@ -3,6 +3,7 @@
 //@ts-ignore
 import '@repo/styles';
 import { Logo } from './Logo';
+import {LOGO} from '../constants/logo'
 import Link from 'next/link';
 
 export function PackageLayout({ children }: { children: React.ReactNode }) {
@@ -13,7 +14,7 @@ export function PackageLayout({ children }: { children: React.ReactNode }) {
         <div className="container mx-auto px-4 py-4 flex justify-between items-center relative z-10">
           <div className="flex flex-col items-start logo-hover">
             <div className="text-xl font-bold text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
-              <Logo />
+              <Logo src = {LOGO.SRC} alt = {LOGO.ALT} width = {LOGO.WIDTH} height = {LOGO.HEIGHT}/>
             </div>
             <span className="text-[10px] sm:text-xs tracking-[0.15em] uppercase text-gold/70 font-light mt-0.5">
               Один поставщик застройщика

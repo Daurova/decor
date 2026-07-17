@@ -1,29 +1,33 @@
 'use client'
 import Image from 'next/image'
-import { useTheme } from 'next-themes'
-import { LOGO } from '../../../packages/ui/constants/logo'
+
 import {useState, useEffect} from 'react'
 import Link from 'next/link'
 
-
-export function Logo() {
+interface ILogo {
+  src: string;
+  alt: string;
+  width: number;
+  height?: number;
+}
+export function Logo({src, alt, width, height}:ILogo) {
   const [mounted, setMounted] = useState(false) 
-  const { theme } = useTheme()
-  const src = theme === 'dark'? LOGO.DARK : LOGO.LIGHT
 
   useEffect(() => setMounted(true), [])
   
     if (!mounted) return null // Предотвращаем гидратацию
     //TODO вынести роуты в отдельную функцию
     //TODO сделать width Auto
+      console.log('Logo props:', { src, alt, width, height });
+
   return (
     <Link href="/" className="flex items-center"> 
       <Image
       src={src}
       className="hover:cursor-pointer"
-      alt={LOGO.ALT}
-      width={LOGO.WIDTH}
-      height={LOGO.HEIGHT}
+      alt={alt}
+      width={width}
+      height={height}
       >
       </Image>
     </Link>

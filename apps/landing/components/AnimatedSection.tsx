@@ -13,7 +13,7 @@ export function AnimatedSection({ children, delay = 0, className = '' }: Animate
   return (
     <motion.section
       className={className}
-      initial={{ opacity: 0, scale: 0.92, filter: 'blur(4px)' }}
+      initial={{ opacity: 1, scale: 1.1, filter: 'blur(4px)' }}
       whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{
