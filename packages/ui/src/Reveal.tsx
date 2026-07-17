@@ -15,7 +15,7 @@ export function Reveal({ children, direction = 'up', delay = 0 }: { children: Re
       y: direction === 'up' ? 60 : direction === 'down' ? -60 : 0,
       x: direction === 'left' ? -60 : direction === 'right' ? 60 : 0,
     },
-    visible: { opacity: 1, y: 0, x: 0, transition: { duration: 0.8, delay, ease: [0.25, 0.1, 0.25, 1] } },
+    visible: { opacity: 1, y: 0, x: 0, transition: { duration: 0.8, delay, ease: [0.25, 0.1, 0.25, 1] as any} },
   };
 
   return (
