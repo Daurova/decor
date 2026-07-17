@@ -1,0 +1,9 @@
+{
+  "name": "@repo/styles",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./global.css",
+  "exports": {
+    ".": "./global.css"
+  }
+}

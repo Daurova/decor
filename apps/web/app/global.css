@@ -1,0 +1,372 @@
+@import "tailwindcss";
+@source "../../packages/ui/src";
+
+/* ================================================ */
+/*  СБРОС ОТСТУПОВ  — ДОБАВЛЕНО!                   */
+/* ================================================ */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; /* временно: убираем скролл у body, чтобы проверить */
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ================================================ */
+/*  СУЩЕСТВУЮЩИЕ ПЕРЕМЕННЫЕ – НЕ ТРОГАТЬ!          */
+/* ================================================ */
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+/* ================================================ */
+/*  НОВЫЕ СЕМАНТИЧЕСКИЕ ЦВЕТА                       */
+/* ================================================ */
+
+:root {
+  --color-primary: #a48159;
+  --color-secondary: #2d2e2b;
+  --color-surface: #ffffff;
+  --color-border: #a48159;
+  --color-muted: #dbd9d3;
+  --color-black: #000000;
+}
+
+.dark {
+  --color-primary: #a48159;
+  --color-secondary: #dbd9d3;
+  --color-surface: #2d2e2b;
+  --color-border: #a48159;
+  --color-muted: #3d3e3b;
+  --color-black: #000000;
+}
+
+@theme inline {
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  --color-surface: var(--color-surface);
+  --color-border: var(--color-border);
+  --color-muted: var(--color-muted);
+  --color-black: var(--color-black);
+}
+
+/* ================================================ */
+/*  ТЁМНЫЙ ШОКОЛАД (фиксированные цвета)            */
+/* ================================================ */
+
+:root {
+  --color-chocolate-darkest: #1A0F0A;
+  --color-chocolate-dark: #3E2C1B;
+  --color-chocolate-mid: #5D3A1A;
+  --color-chocolate-light: #7A4C2A;
+  --color-gold: #D4AF37;
+}
+
+@theme {
+  --color-chocolate-darkest: var(--color-chocolate-darkest);
+  --color-chocolate-dark: var(--color-chocolate-dark);
+  --color-chocolate-mid: var(--color-chocolate-mid);
+  --color-chocolate-light: var(--color-chocolate-light);
+  --color-gold: var(--color-gold);
+}
+
+/* ================================================ */
+/*  ДОПОЛНИТЕЛЬНЫЕ ЦВЕТА (support)                  */
+/* ================================================ */
+
+:root {
+  --color-support-chocolate: #4A2C1A;
+  --color-support-coffee: #6F4E37;
+  --color-support-cappuccino: #C4A484;
+}
+
+.dark {
+  --color-support-chocolate: #5D3A1A;
+  --color-support-coffee: #8B5A2B;
+  --color-support-cappuccino: #D2B48C;
+}
+
+@theme {
+  --color-support-chocolate: var(--color-support-chocolate);
+  --color-support-coffee: var(--color-support-coffee);
+  --color-support-cappuccino: var(--color-support-cappuccino);
+}
+
+/* ================================================ */
+/*  СТИЛИ ДЛЯ СЕКЦИЙ (без snap)                     */
+/* ================================================ */
+
+.section {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ================================================ */
+/*  ШОКОЛАДНЫЕ ЭФФЕКТЫ (для PackageLayout)           */
+/* ================================================ */
+
+@layer components {
+  .chocolate-header {
+    background: linear-gradient(
+      145deg,
+      var(--color-chocolate-darkest) 0%,
+      var(--color-chocolate-dark) 30%,
+      var(--color-chocolate-mid) 70%,
+      var(--color-chocolate-dark) 100%
+    );
+    box-shadow: inset 0 1px 0 rgba(212, 175, 55, 0.08), 0 8px 32px rgba(0, 0, 0, 0.6);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .chocolate-header::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(212, 175, 55, 0.2) 20%,
+      rgba(212, 175, 55, 0.6) 50%,
+      rgba(212, 175, 55, 0.2) 80%,
+      transparent
+    );
+    filter: blur(1px);
+    border-radius: 2px;
+  }
+
+  .chocolate-header::before {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 5%;
+    right: 5%;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(0, 0, 0, 0.6) 30%,
+      rgba(0, 0, 0, 0.8) 70%,
+      transparent
+    );
+    filter: blur(1px);
+  }
+
+  .chocolate-footer {
+    background: linear-gradient(
+      145deg,
+      var(--color-chocolate-darkest) 0%,
+      var(--color-chocolate-dark) 40%,
+      var(--color-chocolate-mid) 60%,
+      var(--color-chocolate-dark) 100%
+    );
+    box-shadow: inset 0 -1px 0 rgba(212, 175, 55, 0.05), 0 -8px 24px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .chocolate-footer::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(212, 175, 55, 0.2) 20%,
+      rgba(212, 175, 55, 0.5) 50%,
+      rgba(212, 175, 55, 0.2) 80%,
+      transparent
+    );
+    filter: blur(1px);
+    border-radius: 2px;
+  }
+
+  .chocolate-content-wrapper {
+    background: linear-gradient(
+      135deg,
+      rgba(62, 44, 27, 0.95) 0%,
+      rgba(30, 15, 10, 0.98) 100%
+    );
+    backdrop-filter: blur(8px);
+    box-shadow:
+      inset 0 2px 0 rgba(212, 175, 55, 0.1),
+      0 20px 60px rgba(0, 0, 0, 0.8),
+      0 0 0 1px rgba(212, 175, 55, 0.1);
+    border-radius: 1.5rem;
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .chocolate-content-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50%;
+    right: -50%;
+    height: 2px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(212, 175, 55, 0.3),
+      transparent
+    );
+    filter: blur(2px);
+    animation: shimmer 4s infinite;
+  }
+
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  .chocolate-body-bg {
+    background: radial-gradient(
+      ellipse at 50% 0%,
+      var(--color-chocolate-mid) 0%,
+      var(--color-chocolate-darkest) 80%
+    );
+  }
+
+  /* Интерактивные эффекты */
+  .nav-link {
+    position: relative;
+    transition: color 0.3s ease;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: linear-gradient(to right, var(--color-gold), rgba(212, 175, 55, 0.3));
+    transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+  }
+
+  .nav-link:hover {
+    color: #ffffff;
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  .logo-hover {
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+
+  .logo-hover:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.3));
+  }
+
+  .content-card-hover {
+    transition: transform 0.3s ease, box-shadow 0.4s ease, border-color 0.3s ease;
+  }
+
+  .content-card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 24px 48px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(212, 175, 55, 0.3),
+      0 0 30px rgba(212, 175, 55, 0.1);
+    border-color: rgba(212, 175, 55, 0.4);
+  }
+
+  .btn-gold {
+    background: transparent;
+    border: 1px solid var(--color-gold);
+    color: var(--color-gold);
+    transition: all 0.3s ease;
+  }
+
+  .btn-gold:hover {
+    background: var(--color-gold);
+    color: var(--color-chocolate-darkest);
+    box-shadow: 0 0 24px rgba(212, 175, 55, 0.3);
+    transform: scale(1.02);
+  }
+
+  .shadow-gold {
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+  }
+  .shadow-gold:hover {
+    box-shadow: 0 0 60px rgba(212, 175, 55, 0.5);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.snap-y {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100vh;
+}
+
+.shadow-gold {
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+}
+.shadow-gold:hover {
+  box-shadow: 0 0 60px rgba(212, 175, 55, 0.5);
+}
+
+@layer components {
+  .shadow-gold {
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+  }
+  .shadow-gold:hover {
+    box-shadow: 0 0 60px rgba(212, 175, 55, 0.5);
+  }
+}
+
+.snap-section {
+  scroll-snap-align: start;
+  max-height: 90%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}

@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+/* ================================================ */
+/*  СУЩЕСТВУЮЩИЕ ПЕРЕМЕННЫЕ – НЕ ТРОГАТЬ!          */
+/* ================================================ */
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+/* ================================================ */
+/*  НОВЫЕ СЕМАНТИЧЕСКИЕ ЦВЕТА                       */
+/*  (добавляем, ничего не удаляя)                   */
+/* ================================================ */
+
+/* Светлая тема */
+:root {
+  --color-primary: #a48159;      /* акцент (кнопки, ссылки, иконки) */
+  --color-secondary: #2d2e2b;    /* вторичный текст, заголовки */
+  --color-surface: #ffffff;      /* карточки, панели */
+  --color-border: #a48159;       /* границы (можно использовать primary) */
+  --color-muted: #dbd9d3;        /* второстепенный фон (разделители) */
+  --color-black: #000000;        /* крайний случай */
+}
+
+/* Тёмная тема (через класс .dark, который добавляет next-themes) */
+.dark {
+  --color-primary: #a48159;      /* оставляем тот же акцент */
+  --color-secondary: #dbd9d3;    /* светлый для текста */
+  --color-surface: #2d2e2b;      /* тёмные карточки */
+  --color-border: #a48159;       /* границы остаются */
+  --color-muted: #3d3e3b;        /* второстепенный фон */
+  --color-black: #000000;
+}
+
+/* Регистрируем новые цвета в Tailwind (добавляем к существующим) */
+@theme inline {
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  --color-surface: var(--color-surface);
+  --color-border: var(--color-border);
+  --color-muted: var(--color-muted);
+  --color-black: var(--color-black);
+}
+
+/* ================================================ */
+/*  ГЛОБАЛЬНЫЕ СТИЛИ                                */
+/* ================================================ */
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}

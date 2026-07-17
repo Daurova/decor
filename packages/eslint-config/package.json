@@ -1,5 +1,5 @@
 {
-  "name": "@repo/eslint-config",
+  "name": "landing-gloriter",
   "version": "0.0.0",
   "type": "module",
   "private": true,
@@ -7,6 +7,12 @@
     "./base": "./base.js",
     "./next-js": "./next.js",
     "./react-internal": "./react-internal.js"
+  },
+  "scripts": {
+    "dev": "next dev -p 3001",
+    "build": "next build",
+    "start": "next start -p 3001",
+    "lint": "next lint"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

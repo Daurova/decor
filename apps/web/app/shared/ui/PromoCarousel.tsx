@@ -2,7 +2,7 @@
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper/modules';
-import '../../globals.css'
+import '../../global.css'
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';

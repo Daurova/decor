@@ -1,6 +1,9 @@
+// @ts-ignore
+import '@repo/styles';
+
 import type { Metadata } from 'next';
 import { Inter, Manrope } from 'next/font/google';
-import './globals.css'; // Tailwind уже должен импортироваться
+// import './globals.css'; // Tailwind уже должен импортироваться
 import { ThemeProvider } from './providers/theme-provider';
 import { ThemeToggle } from './shared/ui/theme-toggle';
 import { Logo } from './shared/ui/Logo';
