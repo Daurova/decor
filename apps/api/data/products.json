@@ -11,7 +11,11 @@
     "thickness": 4,
     "additionalInfo": "серый",
     "material": "Гибкий камень",
-    "color": ["серый"]
+    "color": ["серый"],
+    "imageUrl": "/products/gibkii-kamen-travertine-1-seryi/main.jpeg",
+    "images": [
+      "/products/gibkii-kamen-travertine-1-seryi/main.jpeg"
+    ]
   },
   {
     "name": "Гибкий камень Travertine 2, теплый",
@@ -25,7 +29,11 @@
     "thickness": 4,
     "additionalInfo": "теплый",
     "material": "Гибкий камень",
-    "color": ["бежевый"]
+    "color": ["бежевый"],
+    "imageUrl": "/products/gibkii-kamen-travertine-2-teplyi/main.jpeg",
+    "images": [
+      "/products/gibkii-kamen-travertine-2-teplyi/main.jpeg"
+    ]
   },
   {
     "name": "Гибкий камень Travertine 3, теплый",
@@ -39,7 +47,11 @@
     "thickness": null,
     "additionalInfo": "теплый",
     "material": "Гибкий камень",
-    "color": ["бежевый"]
+    "color": ["бежевый"],
+    "imageUrl": "/products/gibkii-kamen-travertine-3-teplyi/main.jpeg",
+    "images": [
+      "/products/gibkii-kamen-travertine-3-teplyi/main.jpeg"
+    ]
   },
   {
     "name": "Гибкий камень MASAIC, 600x1200",
@@ -53,7 +65,11 @@
     "thickness": null,
     "additionalInfo": "мозаика",
     "material": "Гибкий камень",
-    "color": []
+    "color": [],
+    "imageUrl": "/products/gibkii-kamen-mosaic-600x1200/main.jpeg",
+    "images": [
+      "/products/gibkii-kamen-mosaic-600x1200/main.jpeg"
+    ]
   },
   {
     "name": "Гибкий камень Елочка",
@@ -67,7 +83,11 @@
     "thickness": 4,
     "additionalInfo": "елочка",
     "material": "Гибкий камень",
-    "color": []
+    "color": [],
+    "imageUrl": "/products/gibkii-kamen-elochka/main.jpeg",
+    "images": [
+      "/products/gibkii-kamen-elochka/main.jpeg"
+    ]
   },
   {
     "name": "Гибкий камень, песок, 1200x600 мм",
@@ -81,7 +101,11 @@
     "thickness": 4,
     "additionalInfo": "песок",
     "material": "Гибкий камень",
-    "color": ["песочный"]
+    "color": ["песочный"],
+    "imageUrl": "/products/gibkii-kamen-pesok-1200x600/main.jpeg",
+    "images": [
+      "/products/gibkii-kamen-pesok-1200x600/main.jpeg"
+    ]
   },
   {
     "name": "Гибкий камень, фактурный 1200x600 мм",
@@ -95,7 +119,11 @@
     "thickness": 4.5,
     "additionalInfo": "фактурный",
     "material": "Гибкий камень",
-    "color": []
+    "color": [],
+    "imageUrl": "/products/gibkii-kamen-fakturnyi-1200x600/main.jpeg",
+    "images": [
+      "/products/gibkii-kamen-fakturnyi-1200x600/main.jpeg"
+    ]
   },
   {
     "name": "Гибкий камень под сланец, белый",
@@ -109,7 +137,11 @@
     "thickness": null,
     "additionalInfo": "под сланец, белый",
     "material": "Гибкий камень",
-    "color": ["белый"]
+    "color": ["белый"],
+    "imageUrl": "/products/gibkii-kamen-pod-slants-belyi/main.jpeg",
+    "images": [
+      "/products/gibkii-kamen-pod-slants-belyi/main.jpeg"
+    ]
   },
   {
     "name": "Гибкий камень мрамор, 3000x120 мм",
@@ -123,7 +155,11 @@
     "thickness": 4,
     "additionalInfo": "мрамор",
     "material": "Гибкий камень",
-    "color": ["белый", "серый"]
+    "color": ["белый", "серый"],
+    "imageUrl": "/products/gibkii-kamen-mramor-3000x120/main.jpeg",
+    "images": [
+      "/products/gibkii-kamen-mramor-3000x120/main.jpeg"
+    ]
   },
   {
     "name": "Гибкий камень, сланец (серый) 120x60 мм",
@@ -137,7 +173,11 @@
     "thickness": 9,
     "additionalInfo": "сланец, серый",
     "material": "Гибкий камень",
-    "color": ["серый"]
+    "color": ["серый"],
+    "imageUrl": "/products/gibkii-kamen-slants-seryi-120x60/main.jpeg",
+    "images": [
+      "/products/gibkii-kamen-slants-seryi-120x60/main.jpeg"
+    ]
   },
   {
     "name": "Гибкий камень, сланец (белый) 120x60 мм",
@@ -151,7 +191,11 @@
     "thickness": 9,
     "additionalInfo": "сланец, белый",
     "material": "Гибкий камень",
-    "color": ["белый"]
+    "color": ["белый"],
+    "imageUrl": "/products/gibkii-kamen-slants-belyi-120x60/main.jpeg",
+    "images": [
+      "/products/gibkii-kamen-slants-belyi-120x60/main.jpeg"
+    ]
   },
   {
     "name": "Гибкий камень (полоски) белый",
@@ -165,7 +209,11 @@
     "thickness": 4,
     "additionalInfo": "полоски, белый",
     "material": "Гибкий камень",
-    "color": ["белый"]
+    "color": ["белый"],
+    "imageUrl": "/products/gibkii-kamen-poloskii-belyi/main.jpeg",
+    "images": [
+      "/products/gibkii-kamen-poloskii-belyi/main.jpeg"
+    ]
   },
   {
     "name": "Гибкий камень Раммед, 1200x600 мм",
@@ -179,7 +227,11 @@
     "thickness": 4,
     "additionalInfo": "раммед",
     "material": "Гибкий камень",
-    "color": []
+    "color": [],
+    "imageUrl": "/products/gibkii-kamen-rammed-1200x600/main.jpeg",
+    "images": [
+      "/products/gibkii-kamen-rammed-1200x600/main.jpeg"
+    ]
   },
   {
     "name": "Гибкий камень, скала (белый) 120x60",
@@ -193,7 +245,11 @@
     "thickness": 5,
     "additionalInfo": "скала, белый",
     "material": "Гибкий камень",
-    "color": ["белый"]
+    "color": ["белый"],
+    "imageUrl": "/products/gibkii-kamen-skala-belyi-120x60/main.jpeg",
+    "images": [
+      "/products/gibkii-kamen-skala-belyi-120x60/main.jpeg"
+    ]
   },
   {
     "name": "Гибкий камень Стоун 1200x60 мм",
@@ -207,7 +263,11 @@
     "thickness": 8,
     "additionalInfo": "стоун",
     "material": "Гибкий камень",
-    "color": []
+    "color": [],
+    "imageUrl": "/products/gibkii-kamen-stoun-1200x60/main.jpeg",
+    "images": [
+      "/products/gibkii-kamen-stoun-1200x60/main.jpeg"
+    ]
   },
   {
     "name": "Гибкий камень Travertine 4, теплый, полоски",
@@ -221,6 +281,10 @@
     "thickness": 4,
     "additionalInfo": "теплый, полоски",
     "material": "Гибкий камень",
-    "color": ["бежевый"]
+    "color": ["бежевый"],
+    "imageUrl": "/products/gibkii-kamen-travertine-4-teplyj-poloskii/main.jpeg",
+    "images": [
+      "/products/gibkii-kamen-travertine-4-teplyj-poloskii/main.jpeg"
+    ]
   }
 ]
