@@ -8,6 +8,7 @@ import {
   Body,
   Param,
   Query,
+  NotFoundException,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 
@@ -36,6 +37,15 @@ export class ProductsController {
       sortBy,
       sortOrder,
     });
+  }
+
+  @Get('slug/:slug')
+  async findBySlug(@Param('slug') slug: string) {
+    const product = await this.productsService.findBySlug(slug);
+    if (!product) {
+      throw new NotFoundException('Product not found');
+    }
+    return product;
   }
 
   @Get(':id')

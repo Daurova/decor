@@ -1,33 +1,36 @@
-// shared/ui/theme-toggle.tsx
+// app/shared/ui/theme-toggle.tsx
 'use client';
 
 import { useTheme } from 'next-themes';
-import { SunIcon, MoonIcon } from '@heroicons/react/24/outline'; // Импортируем иконки
 import { useEffect, useState } from 'react';
+import { MoonIcon, SunIcon } from '@heroicons/react/24/outline';
 
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
 
-  // useEffect нужен, чтобы избежать ошибки гидратации, т.к. тема определяется только на клиенте
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
-  if (!mounted) return <div className="w-9 h-9" />; // Placeholder, пока тема неизвестна
-
-  const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
-  };
+  if (!mounted) {
+    return (
+      <button className="p-2 rounded-full hover:bg-muted transition-colors">
+        <div className="w-5 h-5" /> {/* Placeholder */}
+      </button>
+    );
+  }
 
   return (
     <button
-      onClick={toggleTheme}
-      className="p-2 rounded-full  text-foreground hover:cursor-pointer"
-      aria-label="Переключить тему"
+      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      className="p-2 rounded-full hover:bg-muted transition-colors"
+      aria-label="Toggle theme"
     >
       {theme === 'dark' ? (
-        <SunIcon className="h-5 w-5" /> // Иконка солнца для тёмной темы
+        <SunIcon className="w-5 h-5" />
       ) : (
-        <MoonIcon className="h-5 w-5" /> // Иконка луны для светлой темы
+        <MoonIcon className="w-5 h-5" />
       )}
     </button>
   );

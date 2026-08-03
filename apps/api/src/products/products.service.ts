@@ -85,6 +85,14 @@ export class ProductsService {
     return result[0];
   }
 
+  async findBySlug(slug: string) {
+    const result = await this.drizzle.db
+      .select()
+      .from(products)
+      .where(eq(products.slug, slug));
+    return result[0];
+  }
+
   async create(data: any) {
     const result = await this.drizzle.db
       .insert(products)
