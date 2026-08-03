@@ -1,8 +1,13 @@
 // web/app/products/[slug]/components/ProductDetails.tsx
 'use client';
 
+import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Breadcrumbs } from '../../../shared/ui/Breadcrumbs';
-import { ProductPageGallery } from './ProductPageGallery'; // ← новый импорт
+import { ProductPageGallery } from './ProductPageGallery';
+import { ProductAttributes } from './ProductAttributes';
+import { RelatedProducts } from './RelatedProducts';
+import { TryInInterior } from './TryInInterior';
 
 interface Product {
   id: number;
@@ -16,7 +21,11 @@ interface Product {
   images: string[];
   length: number | null;
   height: number | null;
+  thickness: number | null;
   material: string | null;
+  color: string[];
+  style: string[];
+  lightingType: string | null;
 }
 
 interface ProductDetailsProps {
@@ -24,6 +33,8 @@ interface ProductDetailsProps {
 }
 
 export function ProductDetails({ product }: ProductDetailsProps) {
+  const [isInteriorMode, setIsInteriorMode] = useState(false);
+
   const allImages = product.images?.length > 0 
     ? [product.imageUrl, ...product.images] 
     : [product.imageUrl];
@@ -41,10 +52,12 @@ export function ProductDetails({ product }: ProductDetailsProps) {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
         {/* Левая колонка — галерея */}
-        <ProductPageGallery
-          images={allImages}
-          name={product.name}
-        />
+        <div className="flex flex-col">
+          <ProductPageGallery
+            images={allImages}
+            name={product.name}
+          />
+        </div>
 
         {/* Правая колонка — информация */}
         <div className="flex flex-col gap-4">
@@ -59,20 +72,75 @@ export function ProductDetails({ product }: ProductDetailsProps) {
           {product.description && (
             <p className="text-secondary/80">{product.description}</p>
           )}
-          
-          <div className="flex flex-wrap gap-2 mt-2">
-            {product.length && product.height && (
-              <span className="px-3 py-1 bg-muted rounded-full text-sm">
-                {product.length}×{product.height} мм
-              </span>
+
+          {/* Кнопка-переключатель */}
+          <button
+            onClick={() => setIsInteriorMode(!isInteriorMode)}
+            className={`
+              relative px-6 py-3 rounded-xl font-medium transition-all
+              flex items-center justify-center gap-2
+              ${isInteriorMode 
+                ? 'bg-muted text-secondary hover:bg-muted/80' 
+                : 'bg-gradient-to-r from-primary to-primary/80 text-white hover:scale-[1.02]'
+              }
+            `}
+          >
+            {isInteriorMode ? (
+              <>📋 Показать характеристики</>
+            ) : (
+              <>
+                   <svg 
+        className="w-5 h-5 flex-shrink-0" 
+        viewBox="0 0 24 24" 
+        fill="none" 
+        stroke="currentColor" 
+        strokeWidth={2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M12 2L13.5 8.5L20 10L13.5 11.5L12 18L10.5 11.5L4 10L10.5 8.5L12 2Z" />
+        <path d="M19 16L19.5 18.5L22 19L19.5 19.5L19 22L18.5 19.5L16 19L18.5 18.5L19 16Z" />
+      </svg>
+              Попробовать в интерьере с ИИ</>
             )}
-            {product.material && (
-              <span className="px-3 py-1 bg-muted rounded-full text-sm">
-                {product.material}
-              </span>
+          </button>
+
+          {/* Контент с анимацией */}
+          <AnimatePresence mode="wait">
+            {isInteriorMode ? (
+              <motion.div
+                key="interior"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+              >
+                <TryInInterior 
+                  product={product} 
+                  onClose={() => setIsInteriorMode(false)} 
+                />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="attributes"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+              >
+                <ProductAttributes product={product} />
+              </motion.div>
             )}
-          </div>
+          </AnimatePresence>
         </div>
+      </div>
+
+      {/* Похожие товары */}
+      <div className="mt-16">
+        <RelatedProducts
+          categoryId={product.categoryId}
+          currentProductId={product.id}
+        />
       </div>
     </div>
   );
