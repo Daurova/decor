@@ -2,88 +2,51 @@
 @source "../../packages/ui/src";
 
 /* ================================================ */
-/*  СУЩЕСТВУЮЩИЕ ПЕРЕМЕННЫЕ – НЕ ТРОГАТЬ!          */
-/* ================================================ */
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-/* ================================================ */
-/*  НОВЫЕ СЕМАНТИЧЕСКИЕ ЦВЕТА                       */
-/*  (добавляем, ничего не удаляя)                   */
+/*  ОСНОВНАЯ ПАЛИТРА (заменяем чёрно-белую)         */
 /* ================================================ */
 
 /* Светлая тема */
 :root {
-  --color-primary: #a48159;      /* акцент (кнопки, ссылки, иконки) */
-  --color-secondary: #2d2e2b;    /* вторичный текст, заголовки */
-  --color-surface: #ffffff;      /* карточки, панели */
-  --color-border: #a48159;       /* границы (можно использовать primary) */
-  --color-muted: #dbd9d3;        /* второстепенный фон (разделители) */
-  --color-black: #000000;        /* крайний случай */
+  --background: #F5F0EB;        /* тёплый кремово-бежевый */
+  --foreground: #2D2E2B;        /* глубокий тёмно-серый (шоколадный оттенок) */
+  --color-primary: #A48159;      /* тёплый ореховый акцент */
+  --color-secondary: #2D2E2B;    /* основной текст */
+  --color-surface: #FFFFFF;      /* белый для карточек */
+  --color-border: #A48159;       /* ореховый для границ */
+  --color-muted: #E8E0D9;        /* светлый бежевый для фона */
+  --color-black: #1A0F0A;        /* почти чёрный с шоколадным оттенком */
 }
 
-/* Тёмная тема (через класс .dark, который добавляет next-themes) */
+/* Тёмная тема */
 .dark {
-  --color-primary: #a48159;      /* оставляем тот же акцент */
-  --color-secondary: #dbd9d3;    /* светлый для текста */
-  --color-surface: #2d2e2b;      /* тёмные карточки */
-  --color-border: #a48159;       /* границы остаются */
-  --color-muted: #3d3e3b;        /* второстепенный фон */
-  --color-black: #000000;
+  --background: #4d3a2f;         /* глубокий антрацитово-коричневый */
+  --foreground: #EDE5DD;         /* тёплый светлый беж */
+  --color-primary: #C4A484;      /* капучино-золотистый акцент (светлее для тёмной темы) */
+  --color-secondary: #EDE5DD;    /* светлый текст */
+  --color-surface: #231b17;      /* тёмные карточки с шоколадным оттенком */
+  --color-border: #A48159;       /* ореховый для границ (остаётся) */
+  --color-muted: #3D3E3B;        /* тёмный бежевый для фона */
+  --color-black: #0A0705;        /* почти чёрный */
 }
 
-/* Регистрируем новые цвета в Tailwind (добавляем к существующим) */
-@theme inline {
+/* Регистрируем в Tailwind */
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
   --color-primary: var(--color-primary);
   --color-secondary: var(--color-secondary);
   --color-surface: var(--color-surface);
   --color-border: var(--color-border);
   --color-muted: var(--color-muted);
   --color-black: var(--color-black);
-}
-
-/* ================================================ */
-/*  ТЁМНЫЙ ШОКОЛАД (фиксированные цвета)            */
-/*  Не зависят от темы                              */
-/* ================================================ */
-
-:root {
-  --color-chocolate-darkest: #1A0F0A;   /* почти чёрный */
-  --color-chocolate-dark: #3E2C1B;      /* тёмный шоколад */
-  --color-chocolate-mid: #5D3A1A;       /* средний */
-  --color-chocolate-light: #7A4C2A;     /* чуть светлее */
-  --color-gold: #D4AF37;                /* золото */
-}
-
-/* Регистрируем в Tailwind */
-@theme {
-  --color-chocolate-darkest: var(--color-chocolate-darkest);
-  --color-chocolate-dark: var(--color-chocolate-dark);
-  --color-chocolate-mid: var(--color-chocolate-mid);
-  --color-chocolate-light: var(--color-chocolate-light);
-  --color-gold: var(--color-gold);
+  
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
 }
 
 /* ================================================ */
 /*  ДОПОЛНИТЕЛЬНЫЕ ЦВЕТА (support)                  */
-/*  Не входят в основной бренд-палитру              */
+/*  Для акцентов и декора                          */
 /* ================================================ */
 
 :root {
@@ -105,6 +68,27 @@
 }
 
 /* ================================================ */
+/*  ТЁМНЫЙ ШОКОЛАД (для хедера/футера)             */
+/*  Не зависят от темы                              */
+/* ================================================ */
+
+:root {
+  --color-chocolate-darkest: #1A0F0A;
+  --color-chocolate-dark: #3E2C1B;
+  --color-chocolate-mid: #5D3A1A;
+  --color-chocolate-light: #7A4C2A;
+  --color-gold: #D4AF37;
+}
+
+@theme {
+  --color-chocolate-darkest: var(--color-chocolate-darkest);
+  --color-chocolate-dark: var(--color-chocolate-dark);
+  --color-chocolate-mid: var(--color-chocolate-mid);
+  --color-chocolate-light: var(--color-chocolate-light);
+  --color-gold: var(--color-gold);
+}
+
+/* ================================================ */
 /*  ГЛОБАЛЬНЫЕ СТИЛИ                                */
 /* ================================================ */
 
@@ -115,8 +99,23 @@ body {
 }
 
 /* ================================================ */
-/*  ШОКОЛАДНЫЕ ЭФФЕКТЫ (для объёма и глянца)        */
-/*  Используются в PackageLayout                     */
+/*  ПРЕМИУМ-ФОН (для основного контента)            */
+/* ================================================ */
+
+:root {
+  --color-bg-premium: #F5F0EB;
+}
+
+.dark {
+  --color-bg-premium: #1E1612;
+}
+
+@theme {
+  --color-bg-premium: var(--color-bg-premium);
+}
+
+/* ================================================ */
+/*  ШОКОЛАДНЫЕ ЭФФЕКТЫ (для PackageLayout)           */
 /* ================================================ */
 
 @layer components {
@@ -135,7 +134,6 @@ body {
     overflow: hidden;
   }
 
-  /* Изысканная золотая полоса (градиентная, с размытием) */
   .chocolate-header::after {
     content: '';
     position: absolute;
@@ -155,7 +153,6 @@ body {
     border-radius: 2px;
   }
 
-  /* Второй слой — тонкая тёмная линия под золотом */
   .chocolate-header::before {
     content: '';
     position: absolute;
@@ -260,7 +257,6 @@ body {
 /* ================================================ */
 
 @layer components {
-  /* Анимированное подчёркивание для ссылок в навигации */
   .nav-link {
     position: relative;
     transition: color 0.3s ease;
@@ -286,7 +282,6 @@ body {
     width: 100%;
   }
 
-  /* Логотип — лёгкое увеличение и свечение */
   .logo-hover {
     transition: transform 0.3s ease, filter 0.3s ease;
   }
@@ -296,7 +291,6 @@ body {
     filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.3));
   }
 
-  /* Карточка контента — приподнимается, появляется золотая рамка */
   .content-card-hover {
     transition: transform 0.3s ease, box-shadow 0.4s ease, border-color 0.3s ease;
   }
@@ -310,7 +304,6 @@ body {
     border-color: rgba(212, 175, 55, 0.4);
   }
 
-  /* Кнопка (если будет использоваться) — золотой градиент при наведении */
   .btn-gold {
     background: transparent;
     border: 1px solid var(--color-gold);
@@ -325,6 +318,7 @@ body {
     transform: scale(1.02);
   }
 }
+
 html {
   scroll-behavior: smooth;
 }
@@ -334,7 +328,6 @@ html {
   overflow-y: scroll;
   height: 100vh;
 }
-
 
 .shadow-gold {
   box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
@@ -351,9 +344,10 @@ html {
     box-shadow: 0 0 60px rgba(212, 175, 55, 0.5);
   }
 }
+
 .snap-section {
   scroll-snap-align: start;
-  max-height: 90%;          /* вместо min-height */
+  max-height: 90%;
   width: 100%;
   display: flex;
   align-items: center;

@@ -2,101 +2,51 @@
 @source "../../packages/ui/src";
 
 /* ================================================ */
-/*  СБРОС ОТСТУПОВ  — ДОБАВЛЕНО!                   */
+/*  ОСНОВНАЯ ПАЛИТРА (заменяем чёрно-белую)         */
 /* ================================================ */
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  overflow: hidden; /* временно: убираем скролл у body, чтобы проверить */
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-/* ================================================ */
-/*  СУЩЕСТВУЮЩИЕ ПЕРЕМЕННЫЕ – НЕ ТРОГАТЬ!          */
-/* ================================================ */
-
+/* Светлая тема */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #F5F0EB;        /* тёплый кремово-бежевый */
+  --foreground: #2D2E2B;        /* глубокий тёмно-серый (шоколадный оттенок) */
+  --color-primary: #A48159;      /* тёплый ореховый акцент */
+  --color-secondary: #2D2E2B;    /* основной текст */
+  --color-surface: #FFFFFF;      /* белый для карточек */
+  --color-border: #A48159;       /* ореховый для границ */
+  --color-muted: #E8E0D9;        /* светлый бежевый для фона */
+  --color-black: #1A0F0A;        /* почти чёрный с шоколадным оттенком */
 }
 
-@theme inline {
+/* Тёмная тема */
+.dark {
+  --background: #4d3a2f;         /* глубокий антрацитово-коричневый */
+  --foreground: #EDE5DD;         /* тёплый светлый беж */
+  --color-primary: #C4A484;      /* капучино-золотистый акцент (светлее для тёмной темы) */
+  --color-secondary: #EDE5DD;    /* светлый текст */
+  --color-surface: #231b17;      /* тёмные карточки с шоколадным оттенком */
+  --color-border: #A48159;       /* ореховый для границ (остаётся) */
+  --color-muted: #3D3E3B;        /* тёмный бежевый для фона */
+  --color-black: #0A0705;        /* почти чёрный */
+}
+
+/* Регистрируем в Tailwind */
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-/* ================================================ */
-/*  НОВЫЕ СЕМАНТИЧЕСКИЕ ЦВЕТА                       */
-/* ================================================ */
-
-:root {
-  --color-primary: #a48159;
-  --color-secondary: #2d2e2b;
-  --color-surface: #ffffff;
-  --color-border: #a48159;
-  --color-muted: #dbd9d3;
-  --color-black: #000000;
-}
-
-.dark {
-  --color-primary: #a48159;
-  --color-secondary: #dbd9d3;
-  --color-surface: #2d2e2b;
-  --color-border: #a48159;
-  --color-muted: #3d3e3b;
-  --color-black: #000000;
-}
-
-@theme inline {
   --color-primary: var(--color-primary);
   --color-secondary: var(--color-secondary);
   --color-surface: var(--color-surface);
   --color-border: var(--color-border);
   --color-muted: var(--color-muted);
   --color-black: var(--color-black);
-}
-
-/* ================================================ */
-/*  ТЁМНЫЙ ШОКОЛАД (фиксированные цвета)            */
-/* ================================================ */
-
-:root {
-  --color-chocolate-darkest: #1A0F0A;
-  --color-chocolate-dark: #3E2C1B;
-  --color-chocolate-mid: #5D3A1A;
-  --color-chocolate-light: #7A4C2A;
-  --color-gold: #D4AF37;
-}
-
-@theme {
-  --color-chocolate-darkest: var(--color-chocolate-darkest);
-  --color-chocolate-dark: var(--color-chocolate-dark);
-  --color-chocolate-mid: var(--color-chocolate-mid);
-  --color-chocolate-light: var(--color-chocolate-light);
-  --color-gold: var(--color-gold);
+  
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
 }
 
 /* ================================================ */
 /*  ДОПОЛНИТЕЛЬНЫЕ ЦВЕТА (support)                  */
+/*  Для акцентов и декора                          */
 /* ================================================ */
 
 :root {
@@ -118,17 +68,50 @@ body {
 }
 
 /* ================================================ */
-/*  СТИЛИ ДЛЯ СЕКЦИЙ (без snap)                     */
+/*  ТЁМНЫЙ ШОКОЛАД (для хедера/футера)             */
+/*  Не зависят от темы                              */
 /* ================================================ */
 
-.section {
-  min-height: 100vh;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
+:root {
+  --color-chocolate-darkest: #1A0F0A;
+  --color-chocolate-dark: #3E2C1B;
+  --color-chocolate-mid: #5D3A1A;
+  --color-chocolate-light: #7A4C2A;
+  --color-gold: #D4AF37;
+}
+
+@theme {
+  --color-chocolate-darkest: var(--color-chocolate-darkest);
+  --color-chocolate-dark: var(--color-chocolate-dark);
+  --color-chocolate-mid: var(--color-chocolate-mid);
+  --color-chocolate-light: var(--color-chocolate-light);
+  --color-gold: var(--color-gold);
+}
+
+/* ================================================ */
+/*  ГЛОБАЛЬНЫЕ СТИЛИ                                */
+/* ================================================ */
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ================================================ */
+/*  ПРЕМИУМ-ФОН (для основного контента)            */
+/* ================================================ */
+
+:root {
+  --color-bg-premium: #F5F0EB;
+}
+
+.dark {
+  --color-bg-premium: #1E1612;
+}
+
+@theme {
+  --color-bg-premium: var(--color-bg-premium);
 }
 
 /* ================================================ */
@@ -144,7 +127,9 @@ body {
       var(--color-chocolate-mid) 70%,
       var(--color-chocolate-dark) 100%
     );
-    box-shadow: inset 0 1px 0 rgba(212, 175, 55, 0.08), 0 8px 32px rgba(0, 0, 0, 0.6);
+    box-shadow: 
+      inset 0 1px 0 rgba(212, 175, 55, 0.08),
+      0 8px 32px rgba(0, 0, 0, 0.6);
     position: relative;
     overflow: hidden;
   }
@@ -193,7 +178,9 @@ body {
       var(--color-chocolate-mid) 60%,
       var(--color-chocolate-dark) 100%
     );
-    box-shadow: inset 0 -1px 0 rgba(212, 175, 55, 0.05), 0 -8px 24px rgba(0, 0, 0, 0.5);
+    box-shadow: 
+      inset 0 -1px 0 rgba(212, 175, 55, 0.05),
+      0 -8px 24px rgba(0, 0, 0, 0.5);
     position: relative;
     overflow: hidden;
   }
@@ -224,7 +211,7 @@ body {
       rgba(30, 15, 10, 0.98) 100%
     );
     backdrop-filter: blur(8px);
-    box-shadow:
+    box-shadow: 
       inset 0 2px 0 rgba(212, 175, 55, 0.1),
       0 20px 60px rgba(0, 0, 0, 0.8),
       0 0 0 1px rgba(212, 175, 55, 0.1);
@@ -263,8 +250,13 @@ body {
       var(--color-chocolate-darkest) 80%
     );
   }
+}
 
-  /* Интерактивные эффекты */
+/* ================================================ */
+/*  ИНТЕРАКТИВНЫЕ ЭФФЕКТЫ (hover, focus)             */
+/* ================================================ */
+
+@layer components {
   .nav-link {
     position: relative;
     transition: color 0.3s ease;
@@ -305,7 +297,7 @@ body {
 
   .content-card-hover:hover {
     transform: translateY(-4px);
-    box-shadow:
+    box-shadow: 
       0 24px 48px rgba(0, 0, 0, 0.5),
       0 0 0 1px rgba(212, 175, 55, 0.3),
       0 0 30px rgba(212, 175, 55, 0.1);
@@ -324,13 +316,6 @@ body {
     color: var(--color-chocolate-darkest);
     box-shadow: 0 0 24px rgba(212, 175, 55, 0.3);
     transform: scale(1.02);
-  }
-
-  .shadow-gold {
-    box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
-  }
-  .shadow-gold:hover {
-    box-shadow: 0 0 60px rgba(212, 175, 55, 0.5);
   }
 }
 

@@ -1,11 +1,15 @@
-'use client'
-import Image from "next/image";
-import { CategoryCard } from "./entities/category_card/CategoryCard";
-import { CategoryCardSkeleton } from "./entities/category_card/CathegotyCardSkeleton";
-import { useState, useEffect } from 'react'
-import { CardGrid } from "./shared/ui/CardGrid";
-import { PromoCarousel }  from './shared/ui/PromoCarousel';
-import { ProductShowcase } from "./entities/ProductShowCase/ProductShowCase";
+'use client';
+
+import Image from 'next/image';
+import { CategoryCard } from './entities/category_card/CategoryCard';
+import { CategoryCardSkeleton } from './entities/category_card/CathegotyCardSkeleton';
+import { useState, useEffect } from 'react';
+import { CardGrid } from './shared/ui/CardGrid';
+import { PromoCarousel } from './shared/ui/PromoCarousel';
+import { ProductShowcase } from './entities/ProductShowCase/ProductShowCase';
+// //@ts-ignore
+// import '@repo/styles';
+
 
 // Моковые данные спецпредложений
 const mockPromos = [
@@ -36,45 +40,68 @@ const mockPromos = [
 ];
 
 const mockCategories = [
-  { id: 1, name: 'Гибкий камень', slug: 'furniture', imageUrl: 'https://placehold.co/400x400', productCount: 42 },
+  { id: 1, name: 'Гибкий камень', slug: 'gibkii-kamen', imageUrl: 'https://placehold.co/400x400', productCount: 42 },
   { id: 2, name: 'Освещение', slug: 'lighting', imageUrl: 'https://placehold.co/400x400', productCount: 28 },
-  { id: 3, name: 'Гибкий камень', slug: 'decor', imageUrl: 'https://placehold.co/400x400', productCount: 56 },
-  { id: 4, name: 'Гибкий камень', slug: 'textile', imageUrl: 'https://placehold.co/400x400', productCount: 33 },
-  { id: 5, name: 'Освещение', slug: 'tableware', imageUrl: 'https://placehold.co/400x400', productCount: 19 },
+  { id: 3, name: 'Декор', slug: 'decor', imageUrl: 'https://placehold.co/400x400', productCount: 56 },
+  { id: 4, name: 'Фасады', slug: 'facades', imageUrl: 'https://placehold.co/400x400', productCount: 33 },
+  { id: 5, name: 'Покрытия', slug: 'coverings', imageUrl: 'https://placehold.co/400x400', productCount: 19 },
 ];
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(()=>{
-    const timer = setTimeout(()=>{
-      setIsLoading(false)
-    },10000)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 10000);
 
-    return ()=>clearTimeout(timer)
-  },[])
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
-    
-    <div className="flex flex-col flex-1 items-center justify-centerfont-sans font-sans bg-background-secondary">
-      <div className=" w-full max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 ">
-          <PromoCarousel items ={ mockPromos } />
+    <div className="bg-background min-h-screen py-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Блок промо-карусели */}
+        <div className="mb-8">
+          <PromoCarousel items={mockPromos} />
         </div>
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-8 px-4 bg-background-secondary sm:items-start">
-        <div>
-          <CardGrid>{isLoading? 
-             Array.from({length:5}).map((_, index) => (
-              <CategoryCardSkeleton key={`skeleton-${index}`} />
-            ))
-          : mockCategories.map(category=>{
-            return(
-              <CategoryCard  key = {category.id} id = {category.id} slug = {category.slug} name = {category.name} imageUrl={category.imageUrl}></CategoryCard>
-            )
-          })
-          }
+
+        {/* Заголовок категорий */}
+        <div className="mb-6">
+          <h2 className="font-heading text-2xl md:text-3xl font-bold text-secondary tracking-tight">
+            Категории товаров
+          </h2>
+          <p className="text-secondary/60 text-sm mt-1 font-light">
+            Выберите категорию и найдите идеальный материал для вашего проекта
+          </p>
+        </div>
+
+        {/* Сетка категорий */}
+        <main>
+          <CardGrid>
+            {isLoading
+              ? Array.from({ length: 5 }).map((_, index) => (
+                  <CategoryCardSkeleton key={`skeleton-${index}`} />
+                ))
+              : mockCategories.map((category) => (
+                  <CategoryCard
+                    key={category.id}
+                    id={category.id}
+                    slug={category.slug}
+                    name={category.name}
+                    imageUrl={category.imageUrl}
+                  />
+                ))}
           </CardGrid>
+        </main>
+
+        {/* Декоративный разделитель */}
+        <div className="mt-12 pt-8 border-t border-border/20 text-center">
+          <p className="text-secondary/30 text-xs tracking-[0.2em] uppercase font-light">
+            GLORITER — ваш надёжный поставщик
+          </p>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

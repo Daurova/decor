@@ -18,12 +18,14 @@ export const products = pgTable('products', {
   price: decimal('price', { precision: 10, scale: 2 }).notNull(),
   categoryId: integer('category_id'),
   imageUrl: varchar('image_url', { length: 512 }),
-  height: real('height'), // высота в мм
-  length: real('length'), // длина в мм
-  thickness: real('thickness'), // толщина в мм
-  additionalInfo: text('additional_info'), // доп. информация (цвет, фактура)
-  material: varchar('material', { length: 100 }), // материал
-  color: jsonb('color'), // массив цветов или строка
+  height: real('height'),
+  length: real('length'),
+  thickness: real('thickness'),
+  additionalInfo: text('additional_info'),
+  material: varchar('material', { length: 100 }),
+  color: jsonb('color'),
+  categoryName: varchar('category_name', { length: 100 }), // ← добавить
+  images: jsonb('images'), // ← добавить
   createdAt: timestamp('created_at').defaultNow(),
   updatedAt: timestamp('updated_at').defaultNow(),
 });

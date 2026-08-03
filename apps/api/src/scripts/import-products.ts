@@ -23,24 +23,27 @@ async function importProducts() {
   console.log(`📄 Найдено ${records.length} товаров`);
 
   // 3. Вставляем данные (с новыми полями)
-  const productsToInsert = records.map((item: any) => ({
-    name: item.name,
-    slug: item.slug,
-    description: item.description,
-    price: item.price ? parseFloat(item.price) : 0,
-    categoryId: item.categoryId || 1,
-    imageUrl: item.imageUrl || null,          // ← новое поле
-    images: item.images || null,               // ← новое поле
-    height: item.height || null,
-    length: item.length || null,
-    thickness: item.thickness || null,
-    additionalInfo: item.additionalInfo || null,
-    material: item.material || null,
-    color: item.color || null,
-    categoryName: item.categoryName || null,
-  }));
+const productsToInsert = records.map((item: any) => ({
+  name: item.name,
+  slug: item.slug,
+  description: item.description,
+  price: item.price ? parseFloat(item.price) : 0,
+  categoryId: item.categoryId || 1,
+  imageUrl: item.imageUrl || null,
+  height: item.height || null,
+  length: item.length || null,
+  thickness: item.thickness || null,
+  additionalInfo: item.additionalInfo || null,
+  material: item.material || null,
+  color: item.color || null,
+  categoryName: item.categoryName || null, // ← добавить
+  images: item.images || null,              // ← добавить
+}));
 
-  const inserted = await db.insert(products).values(productsToInsert).returning();
+  const inserted = await db
+    .insert(products)
+    .values(productsToInsert)
+    .returning();
   console.log(`✅ Импортировано ${inserted.length} товаров`);
   process.exit(0);
 }

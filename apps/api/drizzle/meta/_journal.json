@@ -15,6 +15,13 @@
       "when": 1783603355750,
       "tag": "0001_sturdy_sentry",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1784979050310,
+      "tag": "0002_cultured_dexter_bennett",
+      "breakpoints": true
     }
   ]
 }
