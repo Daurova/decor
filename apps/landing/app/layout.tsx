@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Gloriter презентация",
+  title: 'Gloriter презентация для ООО "Специализированный застройщик "ИСКРА"',
   description: "Gloriter презентация",
 };
 
@@ -25,7 +25,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ru" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
-        <div className='text-amber-950'>tailwind </div>
         <PackageLayout>{children}</PackageLayout>
       </body>
     </html>

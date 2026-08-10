@@ -67,10 +67,10 @@ export function CaseStudies() {
         </Reveal>
         <Reveal delay={0.15}>
           <p className="mt-2 text-[#D4C5A9]/90 text-lg md:text-xl font-light tracking-wide drop-shadow-[0_0_30px_rgba(212,197,169,0.2)]">
-            Реализованные объекты, которые говорят сами за себя
+            которые говорят сами за себя
           </p>
         </Reveal>
-
+         <div className='text-white'> TODO: Требуются фото для доработки объектов</div>
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           {/* Кейс 1: ЖК бизнес-класса */}
           <Reveal delay={0.1}>

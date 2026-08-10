@@ -13,11 +13,12 @@ export function PackageLayout({ children }: { children: React.ReactNode }) {
       <header className="absolute top-0 left-0 right-0 z-50 chocolate-header">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center relative z-10">
           <div className="flex flex-col items-start logo-hover">
-            <div className="text-xl font-bold text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+            <div className="text-s font-light text-muted drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
               <Logo src = {LOGO.SRC} alt = {LOGO.ALT} width = {LOGO.WIDTH} height = {LOGO.HEIGHT}/>
+              <span>Для ООО &quot;Специализированный застройщик &quot;ИСКРА&quot;</span>
             </div>
-            <span className="text-[10px] sm:text-xs tracking-[0.15em] uppercase text-gold/70 font-light mt-0.5">
-              Один поставщик застройщика
+            <span className="text-[10px] sm:text-xs font-bold tracking-[0.15em] uppercase text-gold/70 mt-0.5">
+              Ваш надежный партнер в комплектации строительных объектов
             </span>
           </div>
           <nav className="flex gap-2 sm:gap-4 whitespace-nowrap">

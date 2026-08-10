@@ -6,10 +6,10 @@ import { Reveal } from '@repo/ui/Reveal';
 
 export function Certification() {
   const points = [
-    { icon: '', title: 'Все товары сертифицированы', desc: 'Соответствие ГОСТ, ТР ТС, пожарным нормам' },
-    { icon: '', title: 'Помогаем с госэкспертизой', desc: 'Готовим пакет документов для проектной экспертизы' },
-    { icon: '', title: 'Сертификаты и декларации', desc: 'Предоставляем полный комплект разрешительной документации' },
-    { icon: '', title: 'Контроль качества', desc: 'Собственная лаборатория и выборочная проверка партий' },
+    { icon: '', title: 'Пожарные сертификаты', desc: '' },
+    { icon: '', title: 'Протоколы испытаний', desc: '' },
+    { icon: '', title: 'Соответствие ГОСТ РФ', desc: '' },
+    { icon: '', title: 'Необходимую техническую документацию', desc: '' },
   ];
 
   return (
@@ -69,15 +69,19 @@ export function Certification() {
       <div className="relative z-10 w-full max-w-6xl px-4 pb-12 md:pb-16 text-center">
         <Reveal>
           <h2 className="text-3xl md:text-5xl font-heading text-white drop-shadow-[0_0_40px_rgba(212,197,169,0.3)]">
-            Сертификация — наша зона ответственности
+            Гарантия качества
           </h2>
         </Reveal>
         <Reveal delay={0.15}>
           <p className="mt-2 text-[#D4C5A9]/90 text-lg md:text-xl font-light tracking-wide drop-shadow-[0_0_30px_rgba(212,197,169,0.2)]">
-            Без сертификатов не сдать объект. Мы закрываем этот вопрос полностью.
+            Все материалы соответствуют требованиям РФ
           </p>
         </Reveal>
-
+        <Reveal delay={0.15}>
+          <p className="mt-2 text-[#D4C5A9]/90 text-lg md:text-xl font-light tracking-wide drop-shadow-[0_0_30px_rgba(212,197,169,0.2)]">
+          Мы предоставляем: 
+          </p>
+        </Reveal>
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
           {points.map((point, idx) => (
             <Reveal key={idx} delay={0.1 * (idx + 1)}>

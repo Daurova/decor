@@ -41,18 +41,17 @@ export function Hero() {
       <div className="relative z-10 w-full max-w-xl px-6 pb-8 md:pb-10 text-center">
         <Reveal>
           <h1 className="text-2xl md:text-4xl font-heading text-white drop-shadow-lg leading-tight">
-            Один поставщик — <br />
+            Комплексные поставки <br />
             <span className="text-[#D4C5A9] drop-shadow-[0_0_30px_rgba(212,197,169,0.15)]">
-              полная готовность
+              материалов и инженерных решений для ваших объектов 
             </span>
           </h1>
         </Reveal>
 
         <Reveal delay={0.15}>
           <p className="mt-2 text-[#D4C5A9]/60 text-xs md:text-sm font-light tracking-wide max-w-lg leading-relaxed mx-auto">
-            Отделочные материалы, фасады, освещение, сантехника.
+            Фасады, отделочные материалы, освещение, паркинги, благоустройство территории, инженерные системы
             <br />
-            Всё под ключ для застройщика.
           </p>
         </Reveal>
 
@@ -68,7 +67,7 @@ export function Hero() {
       </div>
 
       {/* Бейдж */}
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 0.5 }}
@@ -79,7 +78,7 @@ export function Hero() {
         <span>100+ объектов</span>
         <span className="w-px h-3 bg-[#D4C5A9]/20" />
         <span>8+ лет</span>
-      </motion.div>
+      </motion.div> */}
     </section>
   );
 }

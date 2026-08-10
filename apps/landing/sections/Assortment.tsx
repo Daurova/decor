@@ -6,12 +6,12 @@ import { Reveal } from '@repo/ui/Reveal';
 
 export function Assortment() {
   const categories = [
-    { icon: '', name: 'Фасады', desc: 'Вентилируемые, штукатурные, из композита' },
-    { icon: '', name: 'Внутренняя отделка', desc: 'Штукатурка, краска, обои, панели' },
-    { icon: '', name: 'Освещение', desc: 'Внутреннее, наружное, архитектурное' },
-    { icon: '', name: 'Покрытия', desc: 'Полы, стены, потолки — любые материалы' },
-    { icon: '', name: 'Сантехника', desc: 'Раковины, смесители, унитазы, трубы' },
-    { icon: '', name: 'Инженерия', desc: 'Отопление, вентиляция, кондиционирование' },
+    { icon: '', name: 'Фасады', desc: '' },
+    { icon: '', name: 'Внутренняя отделка', desc: '' },
+    { icon: '', name: 'Освещение', desc: '' },
+    { icon: '', name: 'Оборудование территории', desc: '' },
+    { icon: '', name: 'Ландшафт', desc: '' },
+    { icon: '', name: '?', desc: '' },
   ];
 
   return (
@@ -71,12 +71,12 @@ export function Assortment() {
       <div className="relative z-10 w-full max-w-6xl px-4 pb-12 md:pb-16 text-center">
         <Reveal>
           <h2 className="text-3xl md:text-5xl font-heading text-white drop-shadow-[0_0_40px_rgba(212,197,169,0.3)]">
-            Всё для строительства
+            Один надежный партнер вместо десятков поставщиков
           </h2>
         </Reveal>
         <Reveal delay={0.15}>
           <p className="mt-2 text-[#D4C5A9]/90 text-lg md:text-xl font-light tracking-wide drop-shadow-[0_0_30px_rgba(212,197,169,0.2)]">
-            Один поставщик — все категории. Никакого поиска по 20 компаниям.
+            Полный комплекс материалов и оборудования для строительства и отделки.
           </p>
         </Reveal>
 

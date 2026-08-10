@@ -67,15 +67,18 @@ export function Benefits() {
         </Reveal>
         <Reveal delay={0.15}>
           <p className="mt-2 text-[#D4C5A9]/90 text-lg md:text-xl font-light tracking-wide drop-shadow-[0_0_30px_rgba(212,197,169,0.2)]">
-            Строительство без хаоса. Одна точка входа — полный контроль.
+            Мы берем на себя комплектацию строительного объекта.
           </p>
         </Reveal>
 
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
           {[
-            { number: '30%', label: 'Экономия бюджета', desc: 'Прямые поставки без посредников' },
-            { number: '40%', label: 'Сокращение сроков', desc: 'Один поставщик — все позиции' },
-            { number: '100%', label: 'Снижение рисков', desc: 'Сертификация и помощь в экспертизе' },
+            { number: '', label: 'Подбор материалов', desc: '' },
+            { number: '', label: 'Технические консультации', desc: '' },
+            { number: '', label: 'Точные расчеты объектов', desc: '' },
+            { number: '', label: 'Поставки напрямую от производителя', desc: '' },
+            { number: '', label: 'Контроль качества', desc: '' },
+            { number: '', label: 'Логистика', desc: '' },
           ].map((item, idx) => (
             <Reveal key={idx} delay={0.1 * (idx + 1)}>
               <div 

@@ -6,10 +6,10 @@ import { Reveal } from '@repo/ui/Reveal';
 
 export function China() {
   const points = [
-    { icon: '', title: 'Прямые поставки', desc: 'Работаем напрямую с заводами, без посредников' },
-    { icon: '', title: 'Любой товар', desc: 'От светильников до строительного оборудования' },
-    { icon: '', title: 'Таможня под ключ', desc: 'Полное сопровождение: растаможка, логистика, сертификаты' },
-    { icon: '', title: 'Скорость', desc: 'От запроса до поставки — от 14 дней' },
+    { icon: '', title: 'Международную сертификацию', desc: '' },
+    { icon: '', title: 'Современное оборудование', desc: '' },
+    { icon: '', title: 'Автоматизированное производство', desc: '' },
+    { icon: '', title: 'Строгий контроль качества', desc: '' },
   ];
 
   return (
@@ -69,12 +69,12 @@ export function China() {
       <div className="relative z-10 w-full max-w-6xl px-4 pb-12 md:pb-16 text-center">
         <Reveal>
           <h2 className="text-3xl md:text-5xl font-heading text-white drop-shadow-[0_0_40px_rgba(212,197,169,0.3)]">
-            Ваше окно в Китай
+            Современное производство мирового уровня в Китае
           </h2>
         </Reveal>
         <Reveal delay={0.15}>
           <p className="mt-2 text-[#D4C5A9]/90 text-lg md:text-xl font-light tracking-wide drop-shadow-[0_0_30px_rgba(212,197,169,0.2)]">
-            Мы — не посредники. Прямые контракты с заводами и полный контроль качества.
+            Наши партнеры имеют
           </p>
         </Reveal>
 
