@@ -1,10 +1,20 @@
 // apps/landing/sections/Assortment.tsx
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useAnimationControls } from 'framer-motion';
 import { Reveal } from '@repo/ui/Reveal';
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
+
+const photos = [
+  { src: '/images/photos/photo4.jpg', alt: 'GLORITER — категория 1' },
+  { src: '/images/photos/photo5.jpg', alt: 'GLORITER — категория 2' },
+  { src: '/images/photos/photo6.jpg', alt: 'GLORITER — категория 3' },
+];
 
 export function Assortment() {
+  const controls = useAnimationControls();
+
   const categories = [
     { icon: '', name: 'Фасады', desc: '' },
     { icon: '', name: 'Внутренняя отделка', desc: '' },
@@ -13,6 +23,16 @@ export function Assortment() {
     { icon: '', name: 'Ландшафт', desc: '' },
     { icon: '', name: '?', desc: '' },
   ];
+
+  useEffect(() => {
+    const run = async () => {
+      // Этап 1: scale 1.1 → 1 (2 сек)
+      await controls.start('visible');
+      // Этап 2: уезжает вверх и сжимается в полосу
+      await controls.start('strip');
+    };
+    run();
+  }, [controls]);
 
   return (
     <section 
@@ -28,7 +48,7 @@ export function Assortment() {
         scrollSnapAlign: 'start',
       }}
     >
-      {/* Фоновое изображение */}
+      {/* Фоновое изображение
       <motion.div
         className="absolute inset-0 bg-cover bg-center"
         style={{
@@ -38,11 +58,8 @@ export function Assortment() {
         initial={{ scale: 1.1 }}
         whileInView={{ scale: 1 }}
         viewport={{ once: true, amount: 0.3 }}
-        transition={{
-          duration: 2,
-          ease: 'easeOut',
-        }}
-      />
+        transition={{ duration: 2, ease: 'easeOut' }}
+      /> */}
 
       {/* Лёгкий blur */}
       <div className="absolute inset-0 backdrop-blur-[0.5px] bg-black/5" />
@@ -67,8 +84,182 @@ export function Assortment() {
         transition={{ repeat: Infinity, duration: 10, ease: 'easeInOut', delay: 2 }}
       />
 
-      {/* Контент — внизу */}
-      <div className="relative z-10 w-full max-w-6xl px-4 pb-12 md:pb-16 text-center">
+      {/* ============================================ */}
+      {/* Три фото — с микро-наклоном */}
+      {/* ============================================ */}
+      <div 
+        className="absolute inset-0 z-[1] flex items-center justify-center gap-8 md:gap-14 lg:gap-24 px-4 pt-16"
+        style={{ perspective: '1200px' }}
+      >
+        {photos.map((photo, index) => {
+          const [tilt, setTilt] = useState({ x: 0, y: 0 });
+          const [isHovered, setIsHovered] = useState(false);
+
+          const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const tiltX = ((y - centerY) / centerY) * -6;
+            const tiltY = ((x - centerX) / centerX) * 6;
+            setTilt({ x: tiltX, y: tiltY });
+          };
+
+          const handleMouseLeave = () => {
+            setTilt({ x: 0, y: 0 });
+            setIsHovered(false);
+          };
+
+          return (
+            <motion.div
+              key={index}
+              className="relative"
+              initial={{ opacity: 0, y: 40, scale: 0.9, rotateY: -15 }}
+              animate={{ 
+                opacity: 1, 
+                y: [0, -10, 0],
+                scale: 1, 
+                rotateY: 0 
+              }}
+              transition={{
+                opacity: { duration: 1.2, delay: 4.5 + index * 0.2 },
+                scale: { duration: 1.2, delay: 4.5 + index * 0.2 },
+                rotateY: { duration: 1.2, delay: 4.5 + index * 0.2 },
+                y: {
+                  duration: 4 + index * 0.3,
+                  repeat: 1,
+                  ease: 'easeInOut',
+                  delay: 5.5 + index * 0.3,
+                },
+              }}
+              style={{ transformStyle: 'preserve-3d' }}
+              onMouseMove={handleMouseMove}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={handleMouseLeave}
+            >
+              <motion.div
+                className="relative rounded-[1.75rem] p-3"
+                animate={{
+                  rotateX: tilt.x,
+                  rotateY: tilt.y,
+                  scale: isHovered ? 1.04 : 1,
+                }}
+                transition={{
+                  type: 'spring',
+                  stiffness: 300,
+                  damping: 25,
+                }}
+                style={{
+                  width: 'clamp(180px, 22vw, 290px)',
+                  background: 'linear-gradient(145deg, rgba(212,197,169,0.15) 0%, rgba(166,123,91,0.08) 50%, rgba(26,15,10,0.4) 100%)',
+                  backdropFilter: 'blur(20px)',
+                  boxShadow: isHovered
+                    ? `
+                      0 40px 80px -15px rgba(0, 0, 0, 1),
+                      0 25px 50px -10px rgba(0, 0, 0, 0.8),
+                      0 0 0 1px rgba(212, 197, 169, 0.35),
+                      0 0 60px rgba(212, 197, 169, 0.2),
+                      inset 0 1px 0 rgba(255, 255, 255, 0.15),
+                      inset 0 -1px 0 rgba(0, 0, 0, 0.3)
+                    `
+                    : `
+                      0 30px 60px -15px rgba(0, 0, 0, 0.9),
+                      0 20px 40px -10px rgba(0, 0, 0, 0.7),
+                      0 0 0 1px rgba(212, 197, 169, 0.2),
+                      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                      inset 0 -1px 0 rgba(0, 0, 0, 0.3)
+                    `,
+                  transformStyle: 'preserve-3d',
+                  transition: 'box-shadow 0.4s ease',
+                }}
+              >
+                <div 
+                  className="absolute inset-0 rounded-[1.75rem] pointer-events-none"
+                  style={{
+                    background: 'linear-gradient(145deg, rgba(212,197,169,0.4) 0%, transparent 30%, transparent 70%, rgba(212,197,169,0.2) 100%)',
+                    WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                    WebkitMaskComposite: 'xor',
+                    maskComposite: 'exclude',
+                    padding: '1px',
+                  }}
+                />
+
+                <div
+                  className="relative rounded-[1.4rem] overflow-hidden"
+                  style={{ aspectRatio: '9/16' }}
+                >
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    fill
+                    className="object-cover brightness-110 contrast-105 saturate-110"
+                    priority
+                  />
+                </div>
+
+                <div 
+                  className="absolute top-1 left-[20%] right-[20%] h-[1px] transition-all duration-500"
+                  style={{
+                    background: isHovered
+                      ? 'linear-gradient(to right, transparent, rgba(212,197,169,1), transparent)'
+                      : 'linear-gradient(to right, transparent, rgba(212,197,169,0.6), transparent)',
+                    boxShadow: isHovered ? '0 0 12px rgba(212,197,169,0.6)' : 'none',
+                  }}
+                />
+
+                <div 
+                  className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full transition-all duration-500"
+                  style={{
+                    background: '#D4C5A9',
+                    boxShadow: isHovered
+                      ? '0 0 20px rgba(212,197,169,1)'
+                      : '0 0 12px rgba(212,197,169,0.8)',
+                  }}
+                />
+              </motion.div>
+            </motion.div>
+          );
+        })}
+      </div>
+
+      {/* ============================================ */}
+      {/* Заглушка GLORITER — эпичный текст */}
+      {/* ============================================ */}
+      <motion.div
+        className="absolute z-10 flex items-center justify-center overflow-hidden"
+        initial="initial"
+        animate={controls}
+        variants={{
+          initial: { top: 0, left: 0, right: 0, bottom: 0, scale: 1.1, borderRadius: '0px' },
+          visible: { top: 0, left: 0, right: 0, bottom: 0, scale: 1, borderRadius: '0px', transition: { duration: 2, ease: 'easeOut' } },
+          strip: { top: 200, left: 0, right: 0, bottom: 'auto', height: '60px', scale: 1, borderRadius: '0px', transition: { duration: 1.8, ease: 'easeInOut' } },
+        }}
+      >
+        <motion.span
+          className="font-heading font-bold tracking-[0.35em] select-none"
+          style={{
+            background: 'linear-gradient(180deg, #F5E6C8 0%, #D4C5A9 40%, #A67B5B 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            filter: `drop-shadow(0 0 20px rgba(212, 197, 169, 0.5)) drop-shadow(0 0 40px rgba(212, 197, 169, 0.3)) drop-shadow(0 0 80px rgba(166, 123, 91, 0.2))`,
+          }}
+          animate={{ fontSize: ['72px', '72px', '22px'], letterSpacing: ['0.35em', '0.35em', '0.3em'] }}
+          transition={{ duration: 3.8, times: [0, 0.5, 1], ease: 'easeInOut' }}
+        >
+          GLORITER
+        </motion.span>
+      </motion.div>
+
+      {/* Затемнение — только снизу */}
+      <div className="absolute inset-x-0 bottom-0 h-1/2 z-[5] bg-gradient-to-t from-[#1A0F0A]/90 via-[#1A0F0A]/40 to-transparent pointer-events-none" />
+
+      {/* ============================================ */}
+      {/* Контент — внизу: заголовок + категории (НЕ ТРОГАЮ) */}
+      {/* ============================================ */}
+      <div className="relative z-20 w-full max-w-6xl px-4 pb-12 md:pb-16 text-center">
         <Reveal>
           <h2 className="text-3xl md:text-5xl font-heading text-white drop-shadow-[0_0_40px_rgba(212,197,169,0.3)]">
             Один надежный партнер вместо десятков поставщиков
