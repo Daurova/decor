@@ -1,9 +1,9 @@
 // apps/landing/sections/Assortment.tsx
 'use client';
 
-import { motion, useAnimationControls } from 'framer-motion';
+import { motion, useAnimationControls, useInView } from 'framer-motion';
 import { Reveal } from '@repo/ui/Reveal';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
 // === 4 фото для коллажа ===
@@ -16,6 +16,9 @@ const collagePhotos = [
 
 export function Assortment() {
   const controls = useAnimationControls();
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.7 });
+
   const [collageOpen, setCollageOpen] = useState(false);
 
   const categories = [
@@ -27,25 +30,28 @@ export function Assortment() {
     { icon: '', name: '?', desc: '' },
   ];
 
-  // GLORITER — этапы visible → strip
+  // GLORITER — запускается только при появлении секции в окне
   useEffect(() => {
+    if (!isInView) return;
     const run = async () => {
       await controls.start('visible');
       await controls.start('strip');
     };
     run();
-  }, [controls]);
+  }, [controls, isInView]);
 
   // Коллаж — авто-раскрытие через 1.5 сек после появления в стопке
   useEffect(() => {
+    if (!isInView) return;
     const timer = setTimeout(() => {
       setCollageOpen(true);
     }, 6500);
     return () => clearTimeout(timer);
-  }, []);
+  }, [isInView]);
 
   return (
     <section 
+      ref={sectionRef}
       className="relative bg-chocolate-darkest"
       style={{
         height: '100vh',
@@ -88,121 +94,125 @@ export function Assortment() {
         }}
       >
         {collagePhotos.map((photo, index) => {
-  // Состояние стопки
-  const stackedX = index * 24 - 36;
-  const stackedRotate = (index - 1.5) * 4;
-  const stackedY = index * 4;
+          // Состояние стопки
+          const stackedX = index * 24 - 36;
+          const stackedRotate = (index - 1.5) * 4;
+          const stackedY = index * 4;
 
-  // Состояние линии (раскрытое) — увеличено расстояние
-  const openX = (index - 1.5) * 220;
-  const openRotate = 0;
-  const openY = 0;
+          // Состояние линии (раскрытое) — увеличено расстояние
+          const openX = (index - 1.5) * 220;
+          const openRotate = 0;
+          const openY = 0;
 
-  return (
-    <motion.div
-      key={index}
-      className="absolute"
-      initial={{
-        opacity: 0,
-        y: 40,
-        scale: 0.9,
-        x: stackedX,
-        rotate: stackedRotate,
-      }}
-      animate={{
-        opacity: 1,
-        y: collageOpen ? openY : stackedY,
-        x: collageOpen ? openX : stackedX,
-        rotate: collageOpen ? openRotate : stackedRotate,
-        scale: collageOpen ? 1.05 : 1,
-        zIndex: collageOpen ? index : 4 - index,
-      }}
-      transition={{
-        opacity: { duration: 1.2, delay: 4.8 + index * 0.1 },
-        y: { duration: 1.2, delay: 4.8 + index * 0.1 },
-        scale: { duration: 1.2, delay: 4.8 + index * 0.1 },
-        x: { type: 'spring', stiffness: 120, damping: 20 },
-        rotate: { type: 'spring', stiffness: 120, damping: 20 },
-        zIndex: { duration: 0 },
-      }}
-      style={{ transformStyle: 'preserve-3d' }}
-    >
-      {/* Внешний контейнер — рамка как в Hero */}
-      <div
-        className="relative rounded-[1.75rem] p-3"
-        style={{
-          width: 'clamp(140px, 16vw, 230px)',
-          background: 'linear-gradient(145deg, rgba(212,197,169,0.15) 0%, rgba(166,123,91,0.08) 50%, rgba(26,15,10,0.4) 100%)',
-          backdropFilter: 'blur(20px)',
-          boxShadow: `
-            0 30px 60px -15px rgba(0, 0, 0, 0.9),
-            0 20px 40px -10px rgba(0, 0, 0, 0.7),
-            0 0 0 1px rgba(212, 197, 169, 0.2),
-            inset 0 1px 0 rgba(255, 255, 255, 0.1),
-            inset 0 -1px 0 rgba(0, 0, 0, 0.3)
-          `,
-          transformStyle: 'preserve-3d',
-        }}
-      >
-        {/* Золотая градиентная рамка */}
-        <div
-          className="absolute inset-0 rounded-[1.75rem] pointer-events-none"
-          style={{
-            background: 'linear-gradient(145deg, rgba(212,197,169,0.4) 0%, transparent 30%, transparent 70%, rgba(212,197,169,0.2) 100%)',
-            WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-            WebkitMaskComposite: 'xor',
-            maskComposite: 'exclude',
-            padding: '1px',
-          }}
-        />
+          return (
+            <motion.div
+              key={index}
+              className="absolute"
+              initial={{
+                opacity: 0,
+                y: 40,
+                scale: 0.9,
+                x: stackedX,
+                rotate: stackedRotate,
+              }}
+              animate={
+                isInView
+                  ? {
+                      opacity: 1,
+                      y: collageOpen ? openY : stackedY,
+                      x: collageOpen ? openX : stackedX,
+                      rotate: collageOpen ? openRotate : stackedRotate,
+                      scale: collageOpen ? 1.05 : 1,
+                      zIndex: collageOpen ? index : 4 - index,
+                    }
+                  : {}
+              }
+              transition={{
+                opacity: { duration: 1.2, delay: 4.8 + index * 0.1 },
+                y: { duration: 1.2, delay: 4.8 + index * 0.1 },
+                scale: { duration: 1.2, delay: 4.8 + index * 0.1 },
+                x: { type: 'spring', stiffness: 120, damping: 20 },
+                rotate: { type: 'spring', stiffness: 120, damping: 20 },
+                zIndex: { duration: 0 },
+              }}
+              style={{ transformStyle: 'preserve-3d' }}
+            >
+              {/* Внешний контейнер — рамка как в Hero */}
+              <div
+                className="relative rounded-[1.75rem] p-3"
+                style={{
+                  width: 'clamp(140px, 16vw, 230px)',
+                  background: 'linear-gradient(145deg, rgba(212,197,169,0.15) 0%, rgba(166,123,91,0.08) 50%, rgba(26,15,10,0.4) 100%)',
+                  backdropFilter: 'blur(20px)',
+                  boxShadow: `
+                    0 30px 60px -15px rgba(0, 0, 0, 0.9),
+                    0 20px 40px -10px rgba(0, 0, 0, 0.7),
+                    0 0 0 1px rgba(212, 197, 169, 0.2),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                    inset 0 -1px 0 rgba(0, 0, 0, 0.3)
+                  `,
+                  transformStyle: 'preserve-3d',
+                }}
+              >
+                {/* Золотая градиентная рамка */}
+                <div
+                  className="absolute inset-0 rounded-[1.75rem] pointer-events-none"
+                  style={{
+                    background: 'linear-gradient(145deg, rgba(212,197,169,0.4) 0%, transparent 30%, transparent 70%, rgba(212,197,169,0.2) 100%)',
+                    WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                    WebkitMaskComposite: 'xor',
+                    maskComposite: 'exclude',
+                    padding: '1px',
+                  }}
+                />
 
-        {/* Внутренняя область с фото */}
-        <div
-          className="relative rounded-[1.4rem] overflow-hidden"
-          style={{
-            aspectRatio: '3/4',
-          }}
-        >
-          <Image
-            src={photo.src}
-            alt={photo.alt}
-            fill
-            className="object-cover brightness-110 contrast-105 saturate-110"
-            priority
-          />
+                {/* Внутренняя область с фото */}
+                <div
+                  className="relative rounded-[1.4rem] overflow-hidden"
+                  style={{
+                    aspectRatio: '3/4',
+                  }}
+                >
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    fill
+                    className="object-cover brightness-110 contrast-105 saturate-110"
+                    priority
+                  />
 
-          {/* Лёгкий золотой блик */}
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background:
-                'linear-gradient(135deg, rgba(212, 197, 169, 0.15) 0%, transparent 40%)',
-            }}
-          />
+                  {/* Лёгкий золотой блик */}
+                  <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                      background:
+                        'linear-gradient(135deg, rgba(212, 197, 169, 0.15) 0%, transparent 40%)',
+                    }}
+                  />
 
-          {/* Затемнение по краям */}
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              boxShadow: 'inset 0 0 30px rgba(0, 0, 0, 0.5)',
-            }}
-          />
+                  {/* Затемнение по краям */}
+                  <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                      boxShadow: 'inset 0 0 30px rgba(0, 0, 0, 0.5)',
+                    }}
+                  />
 
-          {/* Золотая полоска сверху */}
-          <div
-            className="absolute top-1 left-[15%] right-[15%] h-[1px] transition-all duration-500"
-            style={{
-              background: collageOpen
-                ? 'linear-gradient(to right, transparent, rgba(212, 197, 169, 1), transparent)'
-                : 'linear-gradient(to right, transparent, rgba(212, 197, 169, 0.4), transparent)',
-              boxShadow: collageOpen ? '0 0 12px rgba(212, 197, 169, 0.6)' : 'none',
-            }}
-          />
-        </div>
-      </div>
-    </motion.div>
-  );
-})}
+                  {/* Золотая полоска сверху */}
+                  <div
+                    className="absolute top-1 left-[15%] right-[15%] h-[1px] transition-all duration-500"
+                    style={{
+                      background: collageOpen
+                        ? 'linear-gradient(to right, transparent, rgba(212, 197, 169, 1), transparent)'
+                        : 'linear-gradient(to right, transparent, rgba(212, 197, 169, 0.4), transparent)',
+                      boxShadow: collageOpen ? '0 0 12px rgba(212, 197, 169, 0.6)' : 'none',
+                    }}
+                  />
+                </div>
+              </div>
+            </motion.div>
+          );
+        })}
       </div>
 
       {/* ============================================ */}
