@@ -45,9 +45,8 @@ export function Experience() {
       {/* Лёгкий blur */}
       <div className="absolute inset-0 backdrop-blur-[0.5px] bg-black/5" />
 
-      {/* Затемнение снизу вверх */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#2D1F14]/90 via-[#2D1F14]/20 to-transparent" />
-
+{/* Затемнение — только снизу, как в Hero */}
+<div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#1A0F0A]/90 via-[#1A0F0A]/40 to-transparent pointer-events-none" />
       {/* Плавающие сияющие круги */}
       <motion.div
         className="absolute top-20 right-10 w-64 h-64 bg-[#D4C5A9]/10 rounded-full blur-3xl"

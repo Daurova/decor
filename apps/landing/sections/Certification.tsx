@@ -1,10 +1,15 @@
 // apps/landing/sections/Certification.tsx
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useAnimationControls, useInView } from 'framer-motion';
 import { Reveal } from '@repo/ui/Reveal';
+import { useEffect, useRef } from 'react';
 
 export function Certification() {
+  const controls = useAnimationControls();
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.7 });
+
   const points = [
     { icon: '', title: 'Пожарные сертификаты', desc: '' },
     { icon: '', title: 'Протоколы испытаний', desc: '' },
@@ -12,8 +17,15 @@ export function Certification() {
     { icon: '', title: 'Необходимую техническую документацию', desc: '' },
   ];
 
+  // GLORITER — появляется с scale 1.2 → 1
+  useEffect(() => {
+    if (!isInView) return;
+    controls.start('visible');
+  }, [controls, isInView]);
+
   return (
     <section 
+      ref={sectionRef}
       className="relative bg-chocolate-darkest"
       style={{
         height: '100vh',
@@ -26,28 +38,11 @@ export function Certification() {
         scrollSnapAlign: 'start',
       }}
     >
-      {/* Фоновое изображение */}
-      <motion.div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: "url('https://placehold.co/1920x1080/3E2C1B/a48159?text=GLORITER')",
-          backgroundColor: '#3E2C1B',
-        }}
-        initial={{ scale: 1.1 }}
-        whileInView={{ scale: 1 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{
-          duration: 2,
-          ease: 'easeOut',
-        }}
-      />
-
       {/* Лёгкий blur */}
       <div className="absolute inset-0 backdrop-blur-[0.5px] bg-black/5" />
 
-      {/* Затемнение снизу вверх */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#2D1F14]/90 via-[#2D1F14]/20 to-transparent" />
-
+{/* Затемнение — только снизу, как в Hero */}
+<div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#1A0F0A]/90 via-[#1A0F0A]/40 to-transparent pointer-events-none" />
       {/* Плавающие сияющие круги */}
       <motion.div
         className="absolute top-20 right-10 w-64 h-64 bg-[#D4C5A9]/10 rounded-full blur-3xl"
@@ -65,8 +60,41 @@ export function Certification() {
         transition={{ repeat: Infinity, duration: 10, ease: 'easeInOut', delay: 2 }}
       />
 
+      {/* ============================================ */}
+      {/* Заглушка GLORITER — как в Benefits */}
+      {/* ============================================ */}
+      <motion.div
+        className="absolute inset-0 z-10 flex items-start justify-center overflow-hidden pointer-events-none pt-[200px]"
+        initial="initial"
+        animate={controls}
+        variants={{
+          initial: { scale: 1.2, opacity: 0 },
+          visible: {
+            scale: 1,
+            opacity: 1,
+            transition: { duration: 2.5, ease: 'easeOut' },
+          },
+        }}
+      >
+        <span
+          className="font-heading font-bold tracking-[0.35em] select-none"
+          style={{
+            fontSize: '120px',
+            background: 'linear-gradient(180deg, #F5E6C8 0%, #D4C5A9 40%, #A67B5B 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            filter: `drop-shadow(0 0 20px rgba(212, 197, 169, 0.5)) drop-shadow(0 0 40px rgba(212, 197, 169, 0.3)) drop-shadow(0 0 80px rgba(166, 123, 91, 0.2))`,
+          }}
+        >
+          GLORITER
+        </span>
+      </motion.div>
+
+      {/* ============================================ */}
       {/* Контент — внизу */}
-      <div className="relative z-10 w-full max-w-6xl px-4 pb-12 md:pb-16 text-center">
+      {/* ============================================ */}
+      <div className="relative z-20 w-full max-w-6xl px-4 pb-12 md:pb-16 text-center">
         <Reveal>
           <h2 className="text-3xl md:text-5xl font-heading text-white drop-shadow-[0_0_40px_rgba(212,197,169,0.3)]">
             Гарантия качества
@@ -79,7 +107,7 @@ export function Certification() {
         </Reveal>
         <Reveal delay={0.15}>
           <p className="mt-2 text-[#D4C5A9]/90 text-lg md:text-xl font-light tracking-wide drop-shadow-[0_0_30px_rgba(212,197,169,0.2)]">
-          Мы предоставляем: 
+            Мы предоставляем:{' '}
           </p>
         </Reveal>
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
