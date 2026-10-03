@@ -181,16 +181,7 @@ export function Hero() {
             }}
           />
 
-          {/* Маленькая золотая точка сверху */}
-          <div 
-            className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full transition-all duration-500"
-            style={{
-              background: '#D4C5A9',
-              boxShadow: isHovered
-                ? '0 0 20px rgba(212,197,169,1)'
-                : '0 0 12px rgba(212,197,169,0.8)',
-            }}
-          />
+
         </motion.div>
 
         {/* Отражение под контейнером */}
@@ -226,7 +217,7 @@ export function Hero() {
       transition: { duration: 2, ease: 'easeOut' },
     },
     strip: {
-      top: 200,
+      top: 95,
       left: 0,
       right: 0,
       bottom: 'auto',
