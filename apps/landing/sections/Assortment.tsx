@@ -97,8 +97,8 @@ export function Assortment() {
           breakpoints={{
             // Мобильные (< 640px) — 1.4 фото, отступ 20
             0: {
-              slidesPerView: 1.4,
-              spaceBetween: 20,
+              slidesPerView: 2.2,
+              spaceBetween: 16,
             },
             // Планшет (640px+) — 2 фото, отступ 40
             640: {
