@@ -3,23 +3,25 @@
 
 import { motion, useAnimationControls, useInView } from 'framer-motion';
 import { Reveal } from '@repo/ui/Reveal';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import Image from 'next/image';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
-// === 4 фото для коллажа ===
+// === 4 фото для слайдера ===
 const collagePhotos = [
-  { src: '/images/photos/photo4.jpg', alt: 'GLORITER — коллаж 1' },
-  { src: '/images/photos/photo5.jpg', alt: 'GLORITER — коллаж 2' },
-  { src: '/images/photos/photo6.jpg', alt: 'GLORITER — коллаж 3' },
-  { src: '/images/photos/photo7.jpg', alt: 'GLORITER — коллаж 4' },
+  { src: '/images/photos/photo4.jpg', alt: 'GLORITER — фото 1' },
+  { src: '/images/photos/photo5.jpg', alt: 'GLORITER — фото 2' },
+  { src: '/images/photos/photo6.jpg', alt: 'GLORITER — фото 3' },
+  { src: '/images/photos/photo7.jpg', alt: 'GLORITER — фото 4' },
 ];
 
 export function Assortment() {
   const controls = useAnimationControls();
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.7 });
-
-  const [collageOpen, setCollageOpen] = useState(false);
 
   const categories = [
     { icon: '', name: 'Фасады', desc: '' },
@@ -39,15 +41,6 @@ export function Assortment() {
     };
     run();
   }, [controls, isInView]);
-
-  // Коллаж — авто-раскрытие через 1.5 сек после появления в стопке
-  useEffect(() => {
-    if (!isInView) return;
-    const timer = setTimeout(() => {
-      setCollageOpen(true);
-    }, 6500);
-    return () => clearTimeout(timer);
-  }, [isInView]);
 
   return (
     <section 
@@ -83,80 +76,63 @@ export function Assortment() {
       />
 
       {/* ============================================ */}
-      {/* КОЛЛАЖ ИЗ 4 ФОТО */}
-      {/* Сначала появляются в стопке → пауза → раскрываются в линию */}
+      {/* SWIPER — десктоп как было, адаптив ниже 1024 */}
       {/* ============================================ */}
-      <div
-        className="absolute z-[1] left-1/2 -translate-x-1/2 flex items-center justify-center"
-        style={{
-          top: '300px',
-          perspective: '1200px',
-        }}
-      >
-        {collagePhotos.map((photo, index) => {
-          // Состояние стопки
-          const stackedX = index * 24 - 36;
-          const stackedRotate = (index - 1.5) * 4;
-          const stackedY = index * 4;
-
-          // Состояние линии (раскрытое) — увеличено расстояние
-          const openX = (index - 1.5) * 220;
-          const openRotate = 0;
-          const openY = 0;
-
-          return (
-            <motion.div
-              key={index}
-              className="absolute"
-              initial={{
-                opacity: 0,
-                y: 40,
-                scale: 0.9,
-                x: stackedX,
-                rotate: stackedRotate,
-              }}
-              animate={
-                isInView
-                  ? {
-                      opacity: 1,
-                      y: collageOpen ? openY : stackedY,
-                      x: collageOpen ? openX : stackedX,
-                      rotate: collageOpen ? openRotate : stackedRotate,
-                      scale: collageOpen ? 1.05 : 1,
-                      zIndex: collageOpen ? index : 4 - index,
-                    }
-                  : {}
-              }
-              transition={{
-                opacity: { duration: 1.2, delay: 4.8 + index * 0.1 },
-                y: { duration: 1.2, delay: 4.8 + index * 0.1 },
-                scale: { duration: 1.2, delay: 4.8 + index * 0.1 },
-                x: { type: 'spring', stiffness: 120, damping: 20 },
-                rotate: { type: 'spring', stiffness: 120, damping: 20 },
-                zIndex: { duration: 0 },
-              }}
-              style={{ transformStyle: 'preserve-3d' }}
-            >
-              {/* Внешний контейнер — рамка как в Hero */}
-              <div
-                className="relative rounded-[1.75rem] p-3"
+      <div className="absolute inset-0 z-[1] flex items-center justify-center px-4 pb-24 pt-16">
+        <Swiper
+          modules={[Pagination, Autoplay]}
+          grabCursor={true}
+          centeredSlides={true}
+          slidesPerView={3}
+          spaceBetween={90}
+          loop={true}
+          loopAdditionalSlides={3}
+          speed={1000}
+          autoplay={{
+            delay: 1000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: false,
+          }}
+          pagination={{ clickable: true }}
+          breakpoints={{
+            // Мобильные (< 640px) — 1.4 фото, отступ 20
+            0: {
+              slidesPerView: 1.4,
+              spaceBetween: 20,
+            },
+            // Планшет (640px+) — 2 фото, отступ 40
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 40,
+            },
+            // Десктоп (1024px+) — как было: 3 фото, отступ 90
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 90,
+            },
+          }}
+          className="assortment-swiper w-full max-w-5xl"
+        >
+          {[...collagePhotos, ...collagePhotos, ...collagePhotos].map((photo, index) => (
+            <SwiperSlide key={index}>
+              <motion.div
+                className="relative rounded-[1.5rem] p-2"
+                initial={{ opacity: 0, y: 40, scale: 0.9 }}
+                animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                transition={{ duration: 1.2, delay: 1.5 + (index % 4) * 0.15 }}
                 style={{
-                  width: 'clamp(140px, 16vw, 230px)',
                   background: 'linear-gradient(145deg, rgba(212,197,169,0.15) 0%, rgba(166,123,91,0.08) 50%, rgba(26,15,10,0.4) 100%)',
                   backdropFilter: 'blur(20px)',
                   boxShadow: `
                     0 30px 60px -15px rgba(0, 0, 0, 0.9),
                     0 20px 40px -10px rgba(0, 0, 0, 0.7),
                     0 0 0 1px rgba(212, 197, 169, 0.2),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.1),
-                    inset 0 -1px 0 rgba(0, 0, 0, 0.3)
+                    inset 0 1px 0 rgba(255, 255, 255, 0.1)
                   `,
-                  transformStyle: 'preserve-3d',
                 }}
               >
-                {/* Золотая градиентная рамка */}
-                <div
-                  className="absolute inset-0 rounded-[1.75rem] pointer-events-none"
+                <div 
+                  className="absolute inset-0 rounded-[1.5rem] pointer-events-none"
                   style={{
                     background: 'linear-gradient(145deg, rgba(212,197,169,0.4) 0%, transparent 30%, transparent 70%, rgba(212,197,169,0.2) 100%)',
                     WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
@@ -165,58 +141,24 @@ export function Assortment() {
                     padding: '1px',
                   }}
                 />
-
-                {/* Внутренняя область с фото */}
-                <div
-                  className="relative rounded-[1.4rem] overflow-hidden"
-                  style={{
-                    aspectRatio: '3/4',
-                  }}
-                >
+                <div className="relative rounded-[1.2rem] overflow-hidden" style={{ aspectRatio: '9/16' }}>
                   <Image
                     src={photo.src}
                     alt={photo.alt}
                     fill
                     className="object-cover brightness-110 contrast-105 saturate-110"
+                    sizes="(max-width: 640px) 70vw, (max-width: 1024px) 45vw, 25vw"
                     priority
                   />
-
-                  {/* Лёгкий золотой блик */}
-                  <div
-                    className="absolute inset-0 pointer-events-none"
-                    style={{
-                      background:
-                        'linear-gradient(135deg, rgba(212, 197, 169, 0.15) 0%, transparent 40%)',
-                    }}
-                  />
-
-                  {/* Затемнение по краям */}
-                  <div
-                    className="absolute inset-0 pointer-events-none"
-                    style={{
-                      boxShadow: 'inset 0 0 30px rgba(0, 0, 0, 0.5)',
-                    }}
-                  />
-
-                  {/* Золотая полоска сверху */}
-                  <div
-                    className="absolute top-1 left-[15%] right-[15%] h-[1px] transition-all duration-500"
-                    style={{
-                      background: collageOpen
-                        ? 'linear-gradient(to right, transparent, rgba(212, 197, 169, 1), transparent)'
-                        : 'linear-gradient(to right, transparent, rgba(212, 197, 169, 0.4), transparent)',
-                      boxShadow: collageOpen ? '0 0 12px rgba(212, 197, 169, 0.6)' : 'none',
-                    }}
-                  />
                 </div>
-              </div>
-            </motion.div>
-          );
-        })}
+              </motion.div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
 
       {/* ============================================ */}
-      {/* Заглушка GLORITER — эпичный текст */}
+      {/* Заглушка GLORITER — как было */}
       {/* ============================================ */}
       <motion.div
         className="absolute z-10 flex items-center justify-center overflow-hidden"
@@ -252,17 +194,17 @@ export function Assortment() {
       {/* ============================================ */}
       <div className="relative z-20 w-full max-w-6xl px-4 pb-12 md:pb-16 text-center">
         <Reveal>
-          <h2 className="text-3xl md:text-5xl font-heading text-white drop-shadow-[0_0_40px_rgba(212,197,169,0.3)]">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-heading text-white drop-shadow-[0_0_40px_rgba(212,197,169,0.3)]">
             Один надежный партнер вместо десятков поставщиков
           </h2>
         </Reveal>
         <Reveal delay={0.15}>
-          <p className="mt-2 text-[#D4C5A9]/90 text-lg md:text-xl font-light tracking-wide drop-shadow-[0_0_30px_rgba(212,197,169,0.2)]">
+          <p className="mt-2 text-base sm:text-lg md:text-xl text-[#D4C5A9]/90 font-light tracking-wide drop-shadow-[0_0_30px_rgba(212,197,169,0.2)]">
             Полный комплекс материалов и оборудования для строительства и отделки.
           </p>
         </Reveal>
 
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+        <div className="mt-8 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
           {categories.map((cat, idx) => (
             <Reveal key={idx} delay={0.05 * (idx + 1)}>
               <div 
@@ -272,8 +214,8 @@ export function Assortment() {
                   WebkitMaskImage: 'radial-gradient(circle at center, black 70%, transparent 100%)',
                 }}
               >
-                <div className="text-4xl md:text-5xl">{cat.icon}</div>
-                <div className="mt-1 text-white/90 text-sm md:text-base font-heading">
+                <div className="text-3xl md:text-5xl">{cat.icon}</div>
+                <div className="mt-1 text-white/90 text-xs md:text-base font-heading">
                   {cat.name}
                 </div>
                 <div className="mt-0.5 text-[#D4C5A9]/60 text-[10px] md:text-xs leading-tight">
