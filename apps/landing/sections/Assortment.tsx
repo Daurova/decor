@@ -3,7 +3,8 @@
 
 import { motion, useAnimationControls, useInView } from 'framer-motion';
 import { Reveal } from '@repo/ui/Reveal';
-import { useEffect, useRef } from 'react';
+import { LightBox } from '@repo/ui/LightBox'; // ← добавлено
+import { useEffect, useRef, useState } from 'react'; // ← добавлен useState
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay } from 'swiper/modules';
@@ -22,6 +23,9 @@ export function Assortment() {
   const controls = useAnimationControls();
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.7 });
+
+  // ← добавлено: состояние лайтбокса
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
 
   const categories = [
     { icon: '', name: 'Фасады', desc: '' },
@@ -78,7 +82,8 @@ export function Assortment() {
       {/* ============================================ */}
       {/* SWIPER — десктоп как было, адаптив ниже 1024 */}
       {/* ============================================ */}
-<div className="absolute inset-0 z-[1] flex items-center justify-center px-4 pb-40 md:pb-24 pt-16">        <Swiper
+      <div className="absolute inset-0 z-[1] flex items-center justify-center px-4 pb-40 md:pb-24 pt-16">
+        <Swiper
           modules={[Pagination, Autoplay]}
           grabCursor={true}
           centeredSlides={true}
@@ -89,22 +94,19 @@ export function Assortment() {
           speed={1000}
           autoplay={{
             delay: 1000,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: false,
+            disableOnInteraction: true,
+            pauseOnMouseEnter: true,
           }}
           pagination={{ clickable: true }}
           breakpoints={{
-            // Мобильные (< 640px) — 1.4 фото, отступ 20
             0: {
               slidesPerView: 2.2,
               spaceBetween: 16,
             },
-            // Планшет (640px+) — 2 фото, отступ 40
             640: {
               slidesPerView: 2,
               spaceBetween: 40,
             },
-            // Десктоп (1024px+) — как было: 3 фото, отступ 90
             1024: {
               slidesPerView: 3,
               spaceBetween: 90,
@@ -115,10 +117,11 @@ export function Assortment() {
           {[...collagePhotos, ...collagePhotos, ...collagePhotos].map((photo, index) => (
             <SwiperSlide key={index}>
               <motion.div
-                className="relative rounded-[1.5rem] p-2"
+                className="relative rounded-[1.75rem] p-3 cursor-pointer"
                 initial={{ opacity: 0, y: 40, scale: 0.9 }}
                 animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
                 transition={{ duration: 1.2, delay: 1.5 + (index % 4) * 0.15 }}
+                onClick={() => setLightbox({ src: photo.src, alt: photo.alt })}
                 style={{
                   background: 'linear-gradient(145deg, rgba(212,197,169,0.15) 0%, rgba(166,123,91,0.08) 50%, rgba(26,15,10,0.4) 100%)',
                   backdropFilter: 'blur(20px)',
@@ -126,12 +129,14 @@ export function Assortment() {
                     0 30px 60px -15px rgba(0, 0, 0, 0.9),
                     0 20px 40px -10px rgba(0, 0, 0, 0.7),
                     0 0 0 1px rgba(212, 197, 169, 0.2),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.1)
+                    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                    inset 0 -1px 0 rgba(0, 0, 0, 0.3)
                   `,
+                  transformStyle: 'preserve-3d',
                 }}
               >
                 <div 
-                  className="absolute inset-0 rounded-[1.5rem] pointer-events-none"
+                  className="absolute inset-0 rounded-[1.75rem] pointer-events-none"
                   style={{
                     background: 'linear-gradient(145deg, rgba(212,197,169,0.4) 0%, transparent 30%, transparent 70%, rgba(212,197,169,0.2) 100%)',
                     WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
@@ -140,7 +145,7 @@ export function Assortment() {
                     padding: '1px',
                   }}
                 />
-                <div className="relative rounded-[1.2rem] overflow-hidden" style={{ aspectRatio: '9/16' }}>
+                <div className="relative rounded-[1.4rem] overflow-hidden" style={{ aspectRatio: '9/16' }}>
                   <Image
                     src={photo.src}
                     alt={photo.alt}
@@ -150,6 +155,12 @@ export function Assortment() {
                     priority
                   />
                 </div>
+                <div 
+                  className="absolute top-1 left-[20%] right-[20%] h-[1px]"
+                  style={{
+                    background: 'linear-gradient(to right, transparent, rgba(212,197,169,0.6), transparent)',
+                  }}
+                />
               </motion.div>
             </SwiperSlide>
           ))}
@@ -160,7 +171,7 @@ export function Assortment() {
       {/* Заглушка GLORITER — как было */}
       {/* ============================================ */}
       <motion.div
-        className="absolute z-10 flex items-center justify-center overflow-hidden"
+        className="absolute z-10 flex items-center justify-center overflow-hidden pointer-events-none"
         initial="initial"
         animate={controls}
         variants={{
@@ -225,6 +236,13 @@ export function Assortment() {
           ))}
         </div>
       </div>
+
+      {/* ← добавлено: лайтбокс */}
+      <LightBox
+        src={lightbox?.src ?? null}
+        alt={lightbox?.alt}
+        onClose={() => setLightbox(null)}
+      />
     </section>
   );
 }

@@ -3,10 +3,11 @@
 
 import { motion, useAnimationControls } from 'framer-motion';
 import { Reveal } from '@repo/ui/Reveal';
+import { LightBox } from '@repo/ui/LightBox'; // ← добавлено
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectCoverflow, Pagination, Autoplay } from 'swiper/modules';
+import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
@@ -20,7 +21,7 @@ const photos = [
 // ============================================
 // Отдельный компонент для фото десктопа
 // ============================================
-function HeroPhotoDesktop({ photo, index }: { photo: typeof photos[0]; index: number }) {
+function HeroPhotoDesktop({ photo, index, onOpen }: { photo: typeof photos[0]; index: number; onOpen: (src: string, alt: string) => void }) { // ← добавлен onOpen
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
 
@@ -42,7 +43,7 @@ function HeroPhotoDesktop({ photo, index }: { photo: typeof photos[0]; index: nu
 
   return (
     <motion.div
-      className="relative"
+      className="relative cursor-pointer" // ← добавлен cursor-pointer
       initial={{ opacity: 0, y: 40, scale: 0.9, rotateY: -15 }}
       animate={{ 
         opacity: 1, 
@@ -65,6 +66,7 @@ function HeroPhotoDesktop({ photo, index }: { photo: typeof photos[0]; index: nu
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
+      onClick={() => onOpen(photo.src, photo.alt)} // ← добавлено
     >
       <motion.div
         className="relative rounded-[1.75rem] p-3"
@@ -153,6 +155,9 @@ export function Hero() {
   const controls = useAnimationControls();
   const [isMobile, setIsMobile] = useState(false);
 
+  // ← добавлено: состояние лайтбокса
+  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
+
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
     check();
@@ -183,70 +188,69 @@ export function Hero() {
       }}
     >
       {/* МОБИЛЬНЫЕ — SWIPER с авто-прокруткой */}
-{/* Мобильные — Swiper */}
-{isMobile && (
-  <div className="absolute inset-0 z-[15] flex items-center justify-center px-4 pb-24">
-    <Swiper
-      modules={[Pagination, Autoplay]}
-      grabCursor={true}
-      centeredSlides={true}
-      slidesPerView={2}
-      spaceBetween={16}
-      loop={true}
-      loopAdditionalSlides={3}
-      speed={1000}
-      autoplay={{
-        delay: 3000,
-        disableOnInteraction: false,
-        pauseOnMouseEnter: false,
-      }}
-      pagination={{ clickable: true }}
-      className="hero-swiper w-full"
-      
-    >
-      {[...photos, ...photos, ...photos].map((photo, index) => (
-        <SwiperSlide key={index}>
-          <motion.div
-            className="relative rounded-[1.5rem] p-2"
-            initial={{ opacity: 0, y: 40, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 1.2, delay: 4.5 + (index % 3) * 0.2 }}
-            style={{
-              background: 'linear-gradient(145deg, rgba(212,197,169,0.15) 0%, rgba(166,123,91,0.08) 50%, rgba(26,15,10,0.4) 100%)',
-              backdropFilter: 'blur(20px)',
-              boxShadow: `
-                0 30px 60px -15px rgba(0, 0, 0, 0.9),
-                0 20px 40px -10px rgba(0, 0, 0, 0.7),
-                0 0 0 1px rgba(212, 197, 169, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1)
-              `,
+      {isMobile && (
+        <div className="absolute inset-0 z-[15] flex items-center justify-center px-4 pb-24">
+          <Swiper
+            modules={[Pagination, Autoplay]}
+            grabCursor={true}
+            centeredSlides={true}
+            slidesPerView={2}
+            spaceBetween={16}
+            loop={true}
+            loopAdditionalSlides={3}
+            speed={1000}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: false,
             }}
+            pagination={{ clickable: true }}
+            className="hero-swiper w-full"
           >
-            <div 
-              className="absolute inset-0 rounded-[1.5rem] pointer-events-none"
-              style={{
-                background: 'linear-gradient(145deg, rgba(212,197,169,0.4) 0%, transparent 30%, transparent 70%, rgba(212,197,169,0.2) 100%)',
-                WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                WebkitMaskComposite: 'xor',
-                maskComposite: 'exclude',
-                padding: '1px',
-              }}
-            />
-            <div className="relative rounded-[1.2rem] overflow-hidden" style={{ aspectRatio: '9/16' }}>
-              <Image
-                src={photo.src}
-                alt={photo.alt}
-                fill
-                className="object-cover brightness-110 contrast-105 saturate-110"
-                priority
-              />
-            </div>
-          </motion.div>
-        </SwiperSlide>
-      ))}
-    </Swiper>
-  </div>
-)}
+            {[...photos, ...photos, ...photos].map((photo, index) => (
+              <SwiperSlide key={index}>
+                <motion.div
+                  className="relative rounded-[1.5rem] p-2 cursor-pointer" // ← добавлен cursor-pointer
+                  initial={{ opacity: 0, y: 40, scale: 0.9 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ duration: 1.2, delay: 4.5 + (index % 3) * 0.2 }}
+                  onClick={() => setLightbox({ src: photo.src, alt: photo.alt })} // ← добавлено
+                  style={{
+                    background: 'linear-gradient(145deg, rgba(212,197,169,0.15) 0%, rgba(166,123,91,0.08) 50%, rgba(26,15,10,0.4) 100%)',
+                    backdropFilter: 'blur(20px)',
+                    boxShadow: `
+                      0 30px 60px -15px rgba(0, 0, 0, 0.9),
+                      0 20px 40px -10px rgba(0, 0, 0, 0.7),
+                      0 0 0 1px rgba(212, 197, 169, 0.2),
+                      inset 0 1px 0 rgba(255, 255, 255, 0.1)
+                    `,
+                  }}
+                >
+                  <div 
+                    className="absolute inset-0 rounded-[1.5rem] pointer-events-none"
+                    style={{
+                      background: 'linear-gradient(145deg, rgba(212,197,169,0.4) 0%, transparent 30%, transparent 70%, rgba(212,197,169,0.2) 100%)',
+                      WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                      WebkitMaskComposite: 'xor',
+                      maskComposite: 'exclude',
+                      padding: '1px',
+                    }}
+                  />
+                  <div className="relative rounded-[1.2rem] overflow-hidden" style={{ aspectRatio: '9/16' }}>
+                    <Image
+                      src={photo.src}
+                      alt={photo.alt}
+                      fill
+                      className="object-cover brightness-110 contrast-105 saturate-110"
+                      priority
+                    />
+                  </div>
+                </motion.div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      )}
 
       {/* ДЕСКТОП — 3 фото */}
       {!isMobile && (
@@ -255,7 +259,12 @@ export function Hero() {
           style={{ perspective: '1200px' }}
         >
           {photos.map((photo, index) => (
-            <HeroPhotoDesktop key={index} photo={photo} index={index} />
+            <HeroPhotoDesktop
+              key={index}
+              photo={photo}
+              index={index}
+              onOpen={(src, alt) => setLightbox({ src, alt })} // ← добавлено
+            />
           ))}
         </div>
       )}
@@ -320,6 +329,13 @@ export function Hero() {
           </motion.button>
         </Reveal>
       </div>
+
+      {/* ← добавлено: лайтбокс */}
+      <LightBox
+        src={lightbox?.src ?? null}
+        alt={lightbox?.alt}
+        onClose={() => setLightbox(null)}
+      />
     </section>
   );
 }
