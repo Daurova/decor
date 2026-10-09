@@ -58,7 +58,7 @@ export function Contact() {
       {/* Заглушка GLORITER — адаптивный размер и позиция */}
       {/* ============================================ */}
 <motion.div
-  className="absolute inset-0 z-10 flex items-start justify-center overflow-hidden pointer-events-none pt-[120px] sm:pt-[160px] md:pt-[220px]"
+  className="absolute inset-0 z-10 flex items-start justify-center overflow-hidden pointer-events-none pt-[160px] sm:pt-[160px] md:pt-[220px]"
   initial="initial"
   animate={controls}
   variants={{
