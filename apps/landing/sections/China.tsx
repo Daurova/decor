@@ -60,36 +60,35 @@ export function China() {
         transition={{ repeat: Infinity, duration: 10, ease: 'easeInOut', delay: 2 }}
       />
 
+          {/* ============================================ */}
+      {/* Заглушка GLORITER — адаптивный размер и позиция */}
       {/* ============================================ */}
-      {/* Заглушка GLORITER — как в Benefits */}
-      {/* ============================================ */}
-      <motion.div
-        className="absolute inset-0 z-10 flex items-start justify-center overflow-hidden pointer-events-none pt-[120px]"
-        initial="initial"
-        animate={controls}
-        variants={{
-          initial: { scale: 1.2, opacity: 0 },
-          visible: {
-            scale: 1,
-            opacity: 1,
-            transition: { duration: 2.5, ease: 'easeOut' },
-          },
-        }}
-      >
-        <span
-          className="font-heading font-bold tracking-[0.35em] select-none"
-          style={{
-            fontSize: '120px',
-            background: 'linear-gradient(180deg, #F5E6C8 0%, #D4C5A9 40%, #A67B5B 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-            filter: `drop-shadow(0 0 20px rgba(212, 197, 169, 0.5)) drop-shadow(0 0 40px rgba(212, 197, 169, 0.3)) drop-shadow(0 0 80px rgba(166, 123, 91, 0.2))`,
-          }}
-        >
-          GLORITER
-        </span>
-      </motion.div>
+<motion.div
+  className="absolute inset-0 z-10 flex items-start justify-center overflow-hidden pointer-events-none pt-[80px] sm:pt-[160px] md:pt-[220px]"
+  initial="initial"
+  animate={controls}
+  variants={{
+    initial: { scale: 1.2, opacity: 0 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: { duration: 2.5, ease: 'easeOut' },
+    },
+  }}
+>
+  <span
+    className="font-heading font-bold tracking-[0.2em] md:tracking-[0.35em] select-none text-[36px] sm:text-[72px] md:text-[120px]"
+    style={{
+      background: 'linear-gradient(180deg, #F5E6C8 0%, #D4C5A9 40%, #A67B5B 100%)',
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+      backgroundClip: 'text',
+      filter: `drop-shadow(0 0 20px rgba(212, 197, 169, 0.5)) drop-shadow(0 0 40px rgba(212, 197, 169, 0.3)) drop-shadow(0 0 80px rgba(166, 123, 91, 0.2))`,
+    }}
+  >
+    GLORITER
+  </span>
+</motion.div>
 
       {/* ============================================ */}
       {/* Контент — внизу */}

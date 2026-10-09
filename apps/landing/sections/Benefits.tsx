@@ -57,49 +57,48 @@ export function Benefits() {
       {/* ============================================ */}
       {/* Заглушка GLORITER — адаптивный размер и позиция */}
       {/* ============================================ */}
-      <motion.div
-        className="absolute inset-0 z-10 flex items-start justify-center overflow-hidden pointer-events-none pt-[120px] sm:pt-[160px] md:pt-[220px]"
-        initial="initial"
-        animate={controls}
-        variants={{
-          initial: { scale: 1.2, opacity: 0 },
-          visible: {
-            scale: 1,
-            opacity: 1,
-            transition: { duration: 2.5, ease: 'easeOut' },
-          },
-        }}
-      >
-        <span
-          className="font-heading font-bold tracking-[0.2em] md:tracking-[0.35em] select-none text-[48px] sm:text-[72px] md:text-[120px]"
-          style={{
-            background: 'linear-gradient(180deg, #F5E6C8 0%, #D4C5A9 40%, #A67B5B 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-            filter: `drop-shadow(0 0 20px rgba(212, 197, 169, 0.5)) drop-shadow(0 0 40px rgba(212, 197, 169, 0.3)) drop-shadow(0 0 80px rgba(166, 123, 91, 0.2))`,
-          }}
-        >
-          GLORITER
-        </span>
-      </motion.div>
+<motion.div
+  className="absolute inset-0 z-10 flex items-start justify-center overflow-hidden pointer-events-none pt-[10px] sm:pt-[160px] md:pt-[220px]"
+  initial="initial"
+  animate={controls}
+  variants={{
+    initial: { scale: 1.2, opacity: 0 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: { duration: 2.5, ease: 'easeOut' },
+    },
+  }}
+>
+  <span
+    className="font-heading font-bold tracking-[0.2em] md:tracking-[0.35em] select-none text-[36px] sm:text-[72px] md:text-[120px]"
+    style={{
+      background: 'linear-gradient(180deg, #F5E6C8 0%, #D4C5A9 40%, #A67B5B 100%)',
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+      backgroundClip: 'text',
+      filter: `drop-shadow(0 0 20px rgba(212, 197, 169, 0.5)) drop-shadow(0 0 40px rgba(212, 197, 169, 0.3)) drop-shadow(0 0 80px rgba(166, 123, 91, 0.2))`,
+    }}
+  >
+    GLORITER
+  </span>
+</motion.div>
 
-      {/* ============================================ */}
-      {/* Контент — внизу */}
+  {/* Контент — внизу */}
       {/* ============================================ */}
       <div className="relative z-20 w-full max-w-6xl px-4 pb-12 md:pb-16 text-center">
         <Reveal>
-          <h2 className="text-2xl sm:text-3xl md:text-5xl font-heading text-white drop-shadow-[0_0_40px_rgba(212,197,169,0.3)]">
+          <h2 className="text-2xl md:text-5xl font-heading text-white drop-shadow-[0_0_40px_rgba(212,197,169,0.3)]">
             Почему застройщики выбирают нас
           </h2>
         </Reveal>
         <Reveal delay={0.15}>
-          <p className="mt-2 text-sm sm:text-base md:text-xl text-[#D4C5A9]/90 font-light tracking-wide drop-shadow-[0_0_30px_rgba(212,197,169,0.2)]">
+          <p className="mt-2 text-[#D4C5A9]/90 text-lg md:text-xl font-light tracking-wide drop-shadow-[0_0_30px_rgba(212,197,169,0.2)]">
             Мы берем на себя комплектацию строительного объекта.
           </p>
         </Reveal>
 
-        <div className="mt-6 md:mt-8 grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-6">
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
           {[
             { number: '', label: 'Подбор материалов', desc: '' },
             { number: '', label: 'Технические консультации', desc: '' },
@@ -110,19 +109,19 @@ export function Benefits() {
           ].map((item, idx) => (
             <Reveal key={idx} delay={0.1 * (idx + 1)}>
               <div 
-                className="bg-white/10 backdrop-blur-sm rounded-2xl p-3 md:p-4 shadow-[0_0_30px_rgba(0,0,0,0.3)] hover:shadow-[0_0_50px_rgba(212,197,169,0.15)] transition-all duration-300 hover:scale-105 hover:bg-white/15"
+                className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 shadow-[0_0_30px_rgba(0,0,0,0.3)] hover:shadow-[0_0_50px_rgba(212,197,169,0.15)] transition-all duration-300 hover:scale-105 hover:bg-white/15"
                 style={{
                   maskImage: 'radial-gradient(circle at center, black 70%, transparent 100%)',
                   WebkitMaskImage: 'radial-gradient(circle at center, black 70%, transparent 100%)',
                 }}
               >
-                <div className="text-3xl md:text-6xl font-bold text-[#D4C5A9] drop-shadow-[0_0_40px_rgba(212,197,169,0.3)]">
+                <div className="text-4xl md:text-6xl font-bold text-[#D4C5A9] drop-shadow-[0_0_40px_rgba(212,197,169,0.3)]">
                   {item.number}
                 </div>
-                <div className="mt-1 md:mt-2 text-white/90 text-xs sm:text-sm md:text-lg font-heading drop-shadow-[0_0_10px_rgba(0,0,0,0.4)]">
+                <div className="mt-2 text-white/90 text-base md:text-lg font-heading drop-shadow-[0_0_10px_rgba(0,0,0,0.4)]">
                   {item.label}
                 </div>
-                <div className="mt-0.5 text-[#D4C5A9]/70 text-[10px] md:text-sm drop-shadow-[0_0_10px_rgba(0,0,0,0.3)]">
+                <div className="mt-0.5 text-[#D4C5A9]/70 text-xs md:text-sm drop-shadow-[0_0_10px_rgba(0,0,0,0.3)]">
                   {item.desc}
                 </div>
               </div>
@@ -130,7 +129,6 @@ export function Benefits() {
           ))}
         </div>
       </div>
-
       {/* Бейдж */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}

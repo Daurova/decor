@@ -193,7 +193,7 @@ export function Assortment() {
       {/* ============================================ */}
       <div className="relative z-20 w-full max-w-6xl px-4 pb-12 md:pb-16 text-center">
         <Reveal>
-          <h2 className="text-2xl sm:text-3xl md:text-5xl font-heading text-white drop-shadow-[0_0_40px_rgba(212,197,169,0.3)]">
+          <h2 className="text-xl sm:text-3xl md:text-5xl font-heading text-white drop-shadow-[0_0_40px_rgba(212,197,169,0.3)]">
             Один надежный партнер вместо десятков поставщиков
           </h2>
         </Reveal>

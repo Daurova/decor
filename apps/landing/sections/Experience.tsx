@@ -26,24 +26,35 @@ export function Experience() {
         scrollSnapAlign: 'start',
       }}
     >
-      {/* Фоновое изображение */}
-      <motion.div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: "url('https://placehold.co/1920x1080/3E2C1B/a48159?text=GLORITER')",
-          backgroundColor: '#3E2C1B',
-        }}
-        initial={{ scale: 1.1 }}
-        whileInView={{ scale: 1 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{
-          duration: 2,
-          ease: 'easeOut',
-        }}
-      />
-
-      {/* Лёгкий blur */}
-      <div className="absolute inset-0 backdrop-blur-[0.5px] bg-black/5" />
+         {/* ============================================ */}
+      {/* Заглушка GLORITER — адаптивный размер и позиция */}
+      {/* ============================================ */}
+<motion.div
+  className="absolute inset-0 z-10 flex items-start justify-center overflow-hidden pointer-events-none pt-[10px] sm:pt-[160px] md:pt-[220px]"
+  initial="initial"
+  animate={controls}
+  variants={{
+    initial: { scale: 1.2, opacity: 0 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: { duration: 2.5, ease: 'easeOut' },
+    },
+  }}
+>
+  <span
+    className="font-heading font-bold tracking-[0.2em] md:tracking-[0.35em] select-none text-[36px] sm:text-[72px] md:text-[120px]"
+    style={{
+      background: 'linear-gradient(180deg, #F5E6C8 0%, #D4C5A9 40%, #A67B5B 100%)',
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+      backgroundClip: 'text',
+      filter: `drop-shadow(0 0 20px rgba(212, 197, 169, 0.5)) drop-shadow(0 0 40px rgba(212, 197, 169, 0.3)) drop-shadow(0 0 80px rgba(166, 123, 91, 0.2))`,
+    }}
+  >
+    GLORITER
+  </span>
+</motion.div>
 
 {/* Затемнение — только снизу, как в Hero */}
 <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#1A0F0A]/90 via-[#1A0F0A]/40 to-transparent pointer-events-none" />
