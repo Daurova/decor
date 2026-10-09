@@ -1,13 +1,12 @@
 'use client';
 
-import { AnimatedSection } from '../components/AnimatedSection';
+// import { AnimatedSection } from '../components/AnimatedSection';
 import { Hero } from '../sections/Hero';
 import { Benefits } from '../sections/Benefits';
 import { CaseStudies } from '@/sections/CaseStudies';
 import { Assortment } from '../sections/Assortment';
 import { China } from '@/sections/China';
 import { Certification } from '@/sections/Certification';
-import { Experience } from '@/sections/Experience';
 import { Contact } from '@/sections/Contact';
 
 export default function Home() {
