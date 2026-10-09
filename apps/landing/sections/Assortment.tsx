@@ -78,8 +78,7 @@ export function Assortment() {
       {/* ============================================ */}
       {/* SWIPER — десктоп как было, адаптив ниже 1024 */}
       {/* ============================================ */}
-      <div className="absolute inset-0 z-[1] flex items-center justify-center px-4 pb-24 pt-16">
-        <Swiper
+<div className="absolute inset-0 z-[1] flex items-center justify-center px-4 pb-40 md:pb-24 pt-16">        <Swiper
           modules={[Pagination, Autoplay]}
           grabCursor={true}
           centeredSlides={true}
@@ -226,20 +225,6 @@ export function Assortment() {
           ))}
         </div>
       </div>
-
-      {/* Бейдж */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5, duration: 0.5 }}
-        className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-3 text-[#D4C5A9]/30 text-[10px] tracking-widest bg-black/30 backdrop-blur-sm px-2 py-0.5 rounded-full shadow-[0_0_20px_rgba(212,197,169,0.1)]"
-      >
-        <span>200+ поставщиков</span>
-        <span className="w-px h-3 bg-[#D4C5A9]/20" />
-        <span>Прямые контракты</span>
-        <span className="w-px h-3 bg-[#D4C5A9]/20" />
-        <span>Склад в РФ</span>
-      </motion.div>
     </section>
   );
 }
