@@ -1,0 +1,13 @@
+ssh deploy@194.67.113.214
+111111
+
+cat > ~/app/.env <<'EOF'
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=super_secret_password_change_me
+POSTGRES_DB=catalog
+DATABASE_URL=postgresql://postgres:super_secret_password_change_me@db:5432/catalog
+IMAGE_TAG=latest
+EOF
+
+
+git token expires 23 feb 2027
