@@ -1,11 +1,257 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, Dispatch, SetStateAction } from 'react';
 import { Product, FilterState } from '../../../types/types';
 import { XMarkIcon, FunnelIcon } from '@heroicons/react/24/outline';
 import { ProductImageGallery } from '../ProductImagesGallery/ProductImagesGallery';
 import Link from 'next/link';
 
+// --- ВЫНЕСЕННЫЙ КОМПОНЕНТ ФИЛЬТРОВ ---
+interface FiltersPanelProps {
+  categories: { id: string; name: string }[];
+  filters: FilterState;
+  setFilters: Dispatch<SetStateAction<FilterState>>;
+  availableColors: string[];
+  availableMaterials: string[];
+  availableStyles: string[];
+  availableLightingTypes: string[];
+  toggleFilter: (arrayKey: keyof Pick<FilterState, 'colors' | 'materials' | 'styles' | 'lightingTypes'>, value: string) => void;
+  updateRange: (key: keyof Pick<FilterState, 'lengthRange' | 'heightRange' | 'thicknessRange'>, index: 0 | 1, value: number) => void;
+}
+
+const FiltersPanel = ({
+  categories,
+  filters,
+  setFilters,
+  availableColors,
+  availableMaterials,
+  availableStyles,
+  availableLightingTypes,
+  toggleFilter,
+  updateRange,
+}: FiltersPanelProps) => (
+  <div className="space-y-6">
+    {categories.length > 0 && (
+      <div>
+        <h3 className="font-heading font-semibold mb-3 text-secondary">Категория</h3>
+        <div className="flex gap-2 flex-wrap">
+          <button
+            onClick={() => setFilters(prev => ({ ...prev, category: 'all' }))}
+            className={`px-3 py-1 rounded-full text-sm transition-all ${
+              filters.category === 'all' 
+                ? 'bg-primary text-white' 
+                : 'bg-muted text-secondary hover:bg-primary/20'
+            }`}
+          >
+            Все
+          </button>
+          {categories.map(cat => (
+            <button
+              key={cat.id}
+              onClick={() => setFilters(prev => ({ ...prev, category: cat.name }))}
+              className={`px-3 py-1 rounded-full text-sm transition-all ${
+                filters.category === cat.name 
+                  ? 'bg-primary text-white' 
+                  : 'bg-muted text-secondary hover:bg-primary/20'
+              }`}
+            >
+              {cat.name}
+            </button>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {availableColors.length > 0 && (
+      <div>
+        <h3 className="font-heading font-semibold mb-3 text-secondary">Цвет</h3>
+        <div className="flex gap-2 flex-wrap">
+          {availableColors.map(color => (
+            <button
+              key={color}
+              onClick={() => toggleFilter('colors', color)}
+              className={`px-3 py-1 rounded-full text-sm transition-all ${
+                filters.colors.includes(color) 
+                  ? 'bg-primary text-white' 
+                  : 'bg-muted text-secondary hover:bg-primary/20'
+              }`}
+            >
+              {color}
+            </button>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {availableMaterials.length > 0 && (
+      <div>
+        <h3 className="font-heading font-semibold mb-3 text-secondary">Материал</h3>
+        <div className="flex gap-2 flex-wrap">
+          {availableMaterials.map(mat => (
+            <button
+              key={mat}
+              onClick={() => toggleFilter('materials', mat)}
+              className={`px-3 py-1 rounded-full text-sm transition-all ${
+                filters.materials.includes(mat) 
+                  ? 'bg-primary text-white' 
+                  : 'bg-muted text-secondary hover:bg-primary/20'
+              }`}
+            >
+              {mat}
+            </button>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <div>
+      <h3 className="font-heading font-semibold mb-3 text-secondary">Длина, мм</h3>
+      <div className="flex gap-2 items-center">
+        <input
+          type="number"
+          value={filters.lengthRange[0]}
+          onChange={e => updateRange('lengthRange', 0, Number(e.target.value))}
+          className="w-20 rounded-lg border border-border bg-surface p-1 text-sm text-secondary dark:bg-surface"
+          placeholder="от"
+        />
+        <span className="text-secondary">—</span>
+        <input
+          type="number"
+          value={filters.lengthRange[1]}
+          onChange={e => updateRange('lengthRange', 1, Number(e.target.value))}
+          className="w-20 rounded-lg border border-border bg-surface p-1 text-sm text-secondary dark:bg-surface"
+          placeholder="до"
+        />
+      </div>
+    </div>
+
+    <div>
+      <h3 className="font-heading font-semibold mb-3 text-secondary">Высота, мм</h3>
+      <div className="flex gap-2 items-center">
+        <input
+          type="number"
+          value={filters.heightRange[0]}
+          onChange={e => updateRange('heightRange', 0, Number(e.target.value))}
+          className="w-20 rounded-lg border border-border bg-surface p-1 text-sm text-secondary dark:bg-surface"
+          placeholder="от"
+        />
+        <span className="text-secondary">—</span>
+        <input
+          type="number"
+          value={filters.heightRange[1]}
+          onChange={e => updateRange('heightRange', 1, Number(e.target.value))}
+          className="w-20 rounded-lg border border-border bg-surface p-1 text-sm text-secondary dark:bg-surface"
+          placeholder="до"
+        />
+      </div>
+    </div>
+
+    <div>
+      <h3 className="font-heading font-semibold mb-3 text-secondary">Толщина, мм</h3>
+      <div className="flex gap-2 items-center">
+        <input
+          type="number"
+          value={filters.thicknessRange[0]}
+          onChange={e => updateRange('thicknessRange', 0, Number(e.target.value))}
+          className="w-20 rounded-lg border border-border bg-surface p-1 text-sm text-secondary dark:bg-surface"
+          placeholder="от"
+        />
+        <span className="text-secondary">—</span>
+        <input
+          type="number"
+          value={filters.thicknessRange[1]}
+          onChange={e => updateRange('thicknessRange', 1, Number(e.target.value))}
+          className="w-20 rounded-lg border border-border bg-surface p-1 text-sm text-secondary dark:bg-surface"
+          placeholder="до"
+        />
+      </div>
+    </div>
+
+    <div>
+      <h3 className="font-heading font-semibold mb-3 text-secondary">Цена, ₽</h3>
+      <div className="flex gap-2 items-center">
+        <input
+          type="number"
+          value={filters.priceRange[0]}
+          onChange={e => setFilters(prev => ({ ...prev, priceRange: [Number(e.target.value), prev.priceRange[1]] }))}
+          className="w-20 rounded-lg border border-border bg-surface p-1 text-sm text-secondary dark:bg-surface"
+          placeholder="от"
+        />
+        <span className="text-secondary">—</span>
+        <input
+          type="number"
+          value={filters.priceRange[1]}
+          onChange={e => setFilters(prev => ({ ...prev, priceRange: [prev.priceRange[0], Number(e.target.value)] }))}
+          className="w-20 rounded-lg border border-border bg-surface p-1 text-sm text-secondary dark:bg-surface"
+          placeholder="до"
+        />
+      </div>
+    </div>
+
+    {availableStyles.length > 0 && (
+      <div>
+        <h3 className="font-heading font-semibold mb-3 text-secondary">Стиль</h3>
+        <div className="flex gap-2 flex-wrap">
+          {availableStyles.map(style => (
+            <button
+              key={style}
+              onClick={() => toggleFilter('styles', style)}
+              className={`px-3 py-1 rounded-full text-sm transition-all ${
+                filters.styles.includes(style) 
+                  ? 'bg-primary text-white' 
+                  : 'bg-muted text-secondary hover:bg-primary/20'
+              }`}
+            >
+              {style}
+            </button>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {availableLightingTypes.length > 0 && (
+      <div>
+        <h3 className="font-heading font-semibold mb-3 text-secondary">Тип освещения</h3>
+        <div className="flex gap-2 flex-wrap">
+          {availableLightingTypes.map(type => (
+            <button
+              key={type}
+              onClick={() => toggleFilter('lightingTypes', type)}
+              className={`px-3 py-1 rounded-full text-sm transition-all ${
+                filters.lightingTypes.includes(type) 
+                  ? 'bg-primary text-white' 
+                  : 'bg-muted text-secondary hover:bg-primary/20'
+              }`}
+            >
+              {type}
+            </button>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <button
+      onClick={() =>
+        setFilters({
+          category: 'all',
+          colors: [],
+          materials: [],
+          styles: [],
+          lightingTypes: [],
+          priceRange: [0, 100000],
+          lengthRange: [0, 10000],
+          heightRange: [0, 10000],
+          thicknessRange: [0, 100],
+        })
+      }
+      className="text-sm text-primary hover:underline transition-all"
+    >
+      Сбросить все
+    </button>
+  </div>
+);
+
+// --- ОСНОВНОЙ КОМПОНЕНТ ---
 export function ProductShowcase() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -119,228 +365,6 @@ export function ProductShowcase() {
     });
   };
 
-  const FiltersPanel = () => (
-    <div className="space-y-6">
-      {categories.length > 0 && (
-        <div>
-          <h3 className="font-heading font-semibold mb-3 text-secondary">Категория</h3>
-          <div className="flex gap-2 flex-wrap">
-            <button
-              onClick={() => setFilters(prev => ({ ...prev, category: 'all' }))}
-              className={`px-3 py-1 rounded-full text-sm transition-all ${
-                filters.category === 'all' 
-                  ? 'bg-primary text-white' 
-                  : 'bg-muted text-secondary hover:bg-primary/20'
-              }`}
-            >
-              Все
-            </button>
-            {categories.map(cat => (
-              <button
-                key={cat.id}
-                onClick={() => setFilters(prev => ({ ...prev, category: cat.name }))}
-                className={`px-3 py-1 rounded-full text-sm transition-all ${
-                  filters.category === cat.name 
-                    ? 'bg-primary text-white' 
-                    : 'bg-muted text-secondary hover:bg-primary/20'
-                }`}
-              >
-                {cat.name}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {availableColors.length > 0 && (
-        <div>
-          <h3 className="font-heading font-semibold mb-3 text-secondary">Цвет</h3>
-          <div className="flex gap-2 flex-wrap">
-            {availableColors.map(color => (
-              <button
-                key={color}
-                onClick={() => toggleFilter('colors', color)}
-                className={`px-3 py-1 rounded-full text-sm transition-all ${
-                  filters.colors.includes(color) 
-                    ? 'bg-primary text-white' 
-                    : 'bg-muted text-secondary hover:bg-primary/20'
-                }`}
-              >
-                {color}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {availableMaterials.length > 0 && (
-        <div>
-          <h3 className="font-heading font-semibold mb-3 text-secondary">Материал</h3>
-          <div className="flex gap-2 flex-wrap">
-            {availableMaterials.map(mat => (
-              <button
-                key={mat}
-                onClick={() => toggleFilter('materials', mat)}
-                className={`px-3 py-1 rounded-full text-sm transition-all ${
-                  filters.materials.includes(mat) 
-                    ? 'bg-primary text-white' 
-                    : 'bg-muted text-secondary hover:bg-primary/20'
-                }`}
-              >
-                {mat}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
-      <div>
-        <h3 className="font-heading font-semibold mb-3 text-secondary">Длина, мм</h3>
-        <div className="flex gap-2 items-center">
-          <input
-            type="number"
-            value={filters.lengthRange[0]}
-            onChange={e => updateRange('lengthRange', 0, Number(e.target.value))}
-            className="w-20 rounded-lg border border-border bg-surface p-1 text-sm text-secondary dark:bg-surface"
-            placeholder="от"
-          />
-          <span className="text-secondary">—</span>
-          <input
-            type="number"
-            value={filters.lengthRange[1]}
-            onChange={e => updateRange('lengthRange', 1, Number(e.target.value))}
-            className="w-20 rounded-lg border border-border bg-surface p-1 text-sm text-secondary dark:bg-surface"
-            placeholder="до"
-          />
-        </div>
-      </div>
-
-      <div>
-        <h3 className="font-heading font-semibold mb-3 text-secondary">Высота, мм</h3>
-        <div className="flex gap-2 items-center">
-          <input
-            type="number"
-            value={filters.heightRange[0]}
-            onChange={e => updateRange('heightRange', 0, Number(e.target.value))}
-            className="w-20 rounded-lg border border-border bg-surface p-1 text-sm text-secondary dark:bg-surface"
-            placeholder="от"
-          />
-          <span className="text-secondary">—</span>
-          <input
-            type="number"
-            value={filters.heightRange[1]}
-            onChange={e => updateRange('heightRange', 1, Number(e.target.value))}
-            className="w-20 rounded-lg border border-border bg-surface p-1 text-sm text-secondary dark:bg-surface"
-            placeholder="до"
-          />
-        </div>
-      </div>
-
-      <div>
-        <h3 className="font-heading font-semibold mb-3 text-secondary">Толщина, мм</h3>
-        <div className="flex gap-2 items-center">
-          <input
-            type="number"
-            value={filters.thicknessRange[0]}
-            onChange={e => updateRange('thicknessRange', 0, Number(e.target.value))}
-            className="w-20 rounded-lg border border-border bg-surface p-1 text-sm text-secondary dark:bg-surface"
-            placeholder="от"
-          />
-          <span className="text-secondary">—</span>
-          <input
-            type="number"
-            value={filters.thicknessRange[1]}
-            onChange={e => updateRange('thicknessRange', 1, Number(e.target.value))}
-            className="w-20 rounded-lg border border-border bg-surface p-1 text-sm text-secondary dark:bg-surface"
-            placeholder="до"
-          />
-        </div>
-      </div>
-
-      <div>
-        <h3 className="font-heading font-semibold mb-3 text-secondary">Цена, ₽</h3>
-        <div className="flex gap-2 items-center">
-          <input
-            type="number"
-            value={filters.priceRange[0]}
-            onChange={e => setFilters(prev => ({ ...prev, priceRange: [Number(e.target.value), prev.priceRange[1]] }))}
-            className="w-20 rounded-lg border border-border bg-surface p-1 text-sm text-secondary dark:bg-surface"
-            placeholder="от"
-          />
-          <span className="text-secondary">—</span>
-          <input
-            type="number"
-            value={filters.priceRange[1]}
-            onChange={e => setFilters(prev => ({ ...prev, priceRange: [prev.priceRange[0], Number(e.target.value)] }))}
-            className="w-20 rounded-lg border border-border bg-surface p-1 text-sm text-secondary dark:bg-surface"
-            placeholder="до"
-          />
-        </div>
-      </div>
-
-      {availableStyles.length > 0 && (
-        <div>
-          <h3 className="font-heading font-semibold mb-3 text-secondary">Стиль</h3>
-          <div className="flex gap-2 flex-wrap">
-            {availableStyles.map(style => (
-              <button
-                key={style}
-                onClick={() => toggleFilter('styles', style)}
-                className={`px-3 py-1 rounded-full text-sm transition-all ${
-                  filters.styles.includes(style) 
-                    ? 'bg-primary text-white' 
-                    : 'bg-muted text-secondary hover:bg-primary/20'
-                }`}
-              >
-                {style}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {availableLightingTypes.length > 0 && (
-        <div>
-          <h3 className="font-heading font-semibold mb-3 text-secondary">Тип освещения</h3>
-          <div className="flex gap-2 flex-wrap">
-            {availableLightingTypes.map(type => (
-              <button
-                key={type}
-                onClick={() => toggleFilter('lightingTypes', type)}
-                className={`px-3 py-1 rounded-full text-sm transition-all ${
-                  filters.lightingTypes.includes(type) 
-                    ? 'bg-primary text-white' 
-                    : 'bg-muted text-secondary hover:bg-primary/20'
-                }`}
-              >
-                {type}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
-      <button
-        onClick={() =>
-          setFilters({
-            category: 'all',
-            colors: [],
-            materials: [],
-            styles: [],
-            lightingTypes: [],
-            priceRange: [0, 100000],
-            lengthRange: [0, 10000],
-            heightRange: [0, 10000],
-            thicknessRange: [0, 100],
-          })
-        }
-        className="text-sm text-primary hover:underline transition-all"
-      >
-        Сбросить все
-      </button>
-    </div>
-  );
-
   if (loading) return <div className="text-center py-12 text-secondary">Загрузка товаров...</div>;
   if (error) return <div className="text-center py-12 text-red-500">Ошибка: {error}</div>;
 
@@ -357,7 +381,17 @@ export function ProductShowcase() {
 
       <div className="flex flex-col lg:flex-row gap-8">
         <aside className="hidden lg:block w-72 flex-shrink-0 p-5 rounded-2xl bg-surface/70 dark:bg-surface/70 backdrop-blur-sm shadow-lg sticky top-24 h-fit border border-border/20">
-          <FiltersPanel />
+          <FiltersPanel
+            categories={categories}
+            filters={filters}
+            setFilters={setFilters}
+            availableColors={availableColors}
+            availableMaterials={availableMaterials}
+            availableStyles={availableStyles}
+            availableLightingTypes={availableLightingTypes}
+            toggleFilter={toggleFilter}
+            updateRange={updateRange}
+          />
         </aside>
 
         <main className="flex-1">
@@ -418,7 +452,17 @@ export function ProductShowcase() {
                 <XMarkIcon className="h-6 w-6" />
               </button>
             </div>
-            <FiltersPanel />
+            <FiltersPanel
+              categories={categories}
+              filters={filters}
+              setFilters={setFilters}
+              availableColors={availableColors}
+              availableMaterials={availableMaterials}
+              availableStyles={availableStyles}
+              availableLightingTypes={availableLightingTypes}
+              toggleFilter={toggleFilter}
+              updateRange={updateRange}
+            />
             <button
               onClick={() => setMobileFiltersOpen(false)}
               className="mt-6 w-full bg-primary text-white py-2 rounded-full font-semibold hover:bg-primary/80 transition-all"

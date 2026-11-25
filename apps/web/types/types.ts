@@ -9,6 +9,7 @@ export interface Product {
   categoryName: string;          // название категории (используется в фильтрах)
   price: number;
   image: string;
+  images: string[];
   color: string[];               // массив цветов
   material: string;
   height?: number | null;        // высота в мм
