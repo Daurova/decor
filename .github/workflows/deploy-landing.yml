@@ -1,0 +1,39 @@
+name: Deploy Landing
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-push-landing:
+    name: Build and push landing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: \${{ github.actor }}
+          password: \${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: apps/landing/dockerfile          # <-- учли твой регистр: dockerfile с маленькой буквы
+          push: true
+          tags: |
+            ghcr.io/daurova/decor/landing:\${{ github.sha }}
+            ghcr.io/daurova/decor/landing:latest
+          build-args: |
+            BASE_PATH=/presentations/iskra
