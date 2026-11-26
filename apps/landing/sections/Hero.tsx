@@ -13,9 +13,9 @@ import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 
 const photos = [
-  { src: '/images/photos/photo1.jpg', alt: 'GLORITER — объект 1' },
-  { src: '/images/photos/photo2.jpg', alt: 'GLORITER — объект 2' },
-  { src: '/images/photos/photo3.jpg', alt: 'GLORITER — объект 3' },
+  { src: '/presentations/iskra/images/photos/photo1.jpg', alt: 'GLORITER — объект 1' },
+  { src: '/presentations/iskra/images/photos/photo2.jpg', alt: 'GLORITER — объект 2' },
+  { src: '/presentations/iskra/images/photos/photo3.jpg', alt: 'GLORITER — объект 3' },
 ];
 
 // ============================================

@@ -13,10 +13,10 @@ import 'swiper/css/pagination';
 
 // === 4 фото для слайдера ===
 const collagePhotos = [
-  { src: '/images/photos/photo4.jpg', alt: 'GLORITER — фото 1' },
-  { src: '/images/photos/photo5.jpg', alt: 'GLORITER — фото 2' },
-  { src: '/images/photos/photo6.jpg', alt: 'GLORITER — фото 3' },
-  { src: '/images/photos/photo7.jpg', alt: 'GLORITER — фото 4' },
+  { src: '/presentations/iskra/images/photos/photo4.jpg', alt: 'GLORITER — фото 1' },
+  { src: '/presentations/iskra/images/photos/photo5.jpg', alt: 'GLORITER — фото 2' },
+  { src: '/presentations/iskra/images/photos/photo6.jpg', alt: 'GLORITER — фото 3' },
+  { src: '/presentations/iskra/images/photos/photo7.jpg', alt: 'GLORITER — фото 4' },
 ];
 
 export function Assortment() {
