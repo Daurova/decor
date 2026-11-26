@@ -47,6 +47,8 @@ jobs:
         with:
           context: .
           file: ./apps/web/Dockerfile
+          build-args: |
+            NEXT_PUBLIC_API_URL=https://gloriter.online/api
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
