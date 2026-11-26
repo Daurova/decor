@@ -5,12 +5,14 @@ import * as schema from './schema';
 
 @Injectable()
 export class DrizzleService implements OnModuleInit {
-  public db: ReturnType<typeof drizzle<typeof schema>>;
-  private pool: Pool;
+  public db!: ReturnType<typeof drizzle<typeof schema>>;
+  private pool!: Pool;
 
-  async onModuleInit() {
+  onModuleInit() {
     this.pool = new Pool({
-      connectionString: 'postgresql://postgres:postgres@localhost:5432/catalog',
+      connectionString:
+        process.env.DATABASE_URL ||
+        'postgresql://postgres:postgres@localhost:5432/catalog',
     });
     this.db = drizzle(this.pool, { schema });
   }
