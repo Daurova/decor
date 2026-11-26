@@ -16,6 +16,8 @@ RUN npm install --no-audit --no-fund
 # --- BUILDER ---
 FROM installer AS builder
 COPY --from=pruner /app/out/full/ .
+ARG NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
 RUN npx turbo run build --filter=web...
 
 # --- RUNNER (BigTech style) ---
